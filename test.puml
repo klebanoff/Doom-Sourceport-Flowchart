@@ -1,0 +1,612 @@
+@startuml
+skinparam monochrome true
+skinparam BackgroundColor white
+object "Doom v1.0" as doomv1_0 
+object "Doom v1.1" as doomv1_1
+object "Doom v1.2" as doomv1_2 
+object "Doom v1.3" as doomv1_3 
+object "Doom v1.4" as doomv1_4 
+object "Doom v1.5" as doomv1_5 
+object "Doom v1.666" as doomv1_666 
+object "Doom v1.7" as doomv1_7 
+object "Doom v1.7a" as doomv1_7a
+object "Doom v1.8" as doomv1_8
+object "Doom v1.9" as doomv1_9
+object "Ultimate Doom" as ultimate
+object "Final Doom" as final
+object "Final Doom (Id Anthology)" as finalanthology
+object "Linux Doom 1.10" as linuxdoom
+object "Heretic" as heretic
+object "Hexen" as hexen
+object "Doom SonyPlaystation" as doomsonyps
+object "WinDoom (Microsoft)" as windoommicro
+object "Jaguar Doom" as jaguardoom
+object "Hexen (Sony Playstation)" as hexensonyps
+object "Hexen (Sega Saturn)" as hexensegasaturn
+object "Hexen (Nintendo 64)" as hexennintendo64
+object "Hexen (Apple Macintosh)" as hexenapplemacintosh
+object "CGI Doom" as cgidoom
+object "GXN Doom" as gxndoom
+object "Strife" as strife
+object "WinDoom 1.8" as windoom18
+object "Doom for 3DO" as doomfor3do
+object "Doom for Sega 32X" as doomforsegas32x
+object "Doom for GameBoyAdvance" as doomforgameboyadvance
+object "Doom95" as doom95
+object "Hexen95" as hexen95
+object "Final Doom for Sony Playstation" as finaldoomforsonyps
+object "Doom for Sega Saturn" as doomforsegasaturn
+object "Doom 64" as doom64
+object "Doom 64 (2020)" as doom64_2020
+object "Chex Quest" as chexquest
+object "Doom (Acorn RiscOS)" as doomacornriscos
+object "Doom and Doom II for XBox" as doomanddoom2forxbox
+object "Doom and Doom II for XBox 360" as doomanddoom2forxbox360
+object "Doom Classic" as doomclassic
+object "Doom Classic (Unity)" as doomclassicunity
+object "Doom + Doom II" as doomplusdoom2
+object "Id Tech 4" as idtech4
+object "Unity" as unity
+object "Chocolate Doom" as chocolatedoom
+object "DelphiDoom" as delphidoom
+object "Doom Legacy" as doomlegacy
+object "Doomsday" as doomsday
+object "GLHeretic" as glheretic
+object "HeXetic" as hexetic
+object "HHeretic" as hheretic
+object "Linux Heretic" as linuxheretic
+object "wHeretic" as wheretic
+object "WinHeretic" as winheretic
+object "ZDoom" as zdoom
+object "FPCDoom" as fpcdoom
+object "DOSDoom" as dosdoom
+object "SDL Doom" as sdldoom
+object "jHexen" as jhexen
+object "jHeretic" as jheretic
+object "jDoom" as jdoom
+object "DoomGL" as doomgl
+object "Chocorenderlimits" as chocorenderlimits
+object "CRL" as crl
+object "Competition Doom" as competitiondoom
+object "Crispy Doom" as crispydoom
+object "International Doom" as internationaldoom
+object "Russian Doom" as russiandoom
+object "Doom Retro" as doomretro
+object "Doom Vanille" as doomvanille
+object "gamesrc-ver-recreation" as gamesrcverrecreation
+object "Doom128" as doom128
+object "Doom32" as doom32
+object "Doom2-plus" as doom2plus
+object "DOOM2.EXE" as doom2exe
+object "Doom-plus" as doomplus
+object "Final Doom-plus" as finaldoomplus
+object "HERETIC.EXE" as hereticexe
+object "Heretic-plus" as hereticplus
+object "HEXEN.EXE" as hexenexe
+object "Hexen-plus" as hexenplus
+object "Heretic128" as heretic128
+object "Hexen128" as hexen128
+object "Strife128" as strife128
+object "Russian Doom (2023)" as russian2023
+object "Marshmallow Doom" as marshmallowdoom
+object "So Doom" as sodoom
+object "Strawberry Doom" as strawberrydoom
+object "Strife: Veteran Edition" as strifeveteranedition
+object "Doom3D" as doom3d
+object "Doom64 EX" as doom64ex
+object "KEX 2" as kex2
+object "KEX Engine (KEX 3)" as kex3
+object "Doom64 EX Plus" as doom64explus
+object "Doom64 Super EX Plus" as doom64superexplus
+object "ZDoomGL (v1)" as zdoomgl_v1
+object "ATB Doom" as atbdoom
+object "NTDOOM" as ntdoom
+object "WDMP" as wdmp
+object "bZDoom" as bzdoom
+object "csDoom" as csdoom
+object "Odamex" as odamex
+object "ZDaemon" as zdaemon
+object "X-Doom" as x_doom
+object "XDoom" as xdoom
+object "GZDoom" as gzdoom
+object "GZ3Doom" as gz3doom
+object "ViveDoom" as vivedoom
+object "GZDoom for OS X" as gzdoomforosx
+object "GZDoom Vintage" as gzdoomvintage
+object "LZDoom" as lzdoom
+object "Freedoom For Android" as freedoom
+object "QZDoom" as qzdoom
+object "ScoreDoom" as scoredoom
+object "ScoreDoomST" as scoredoomst
+object "Skulltag" as skulltag
+object "Zandronum" as zandronum
+object "Q-Zandronum" as qzandronum
+object "ZDoomGL (v2)" as zdoomgl_v2
+object "ZDaemonGL" as zdaemongl
+object "Tower of Babel" as towertofbabel
+object "VKDoom" as vkdoom
+object "K8Vavoom" as k8vavoom
+object "Quake" as quake
+object "Vavoom" as vavoom
+object "ManDoom" as mandoom
+object "DoomPC" as doompc
+object "DoomGLES" as doomgles
+object "DoomPPC" as doomppc
+object "Phoenix Doom" as phoenixdoom
+object "OptiDoom" as optidoom
+object "Calico" as calico
+object "Doom 32X: Resurrection" as doom32xresurrection
+object "STRIFE1.EXE" as strife1exe
+object "Boom" as boom
+object "LinBoom" as linboom
+object "LxDoom" as lxdoom
+object "MBF" as mbf
+object "LsdlDoom" as lsdl
+object "LsdlDoom-PS2" as lsdlps2
+object "PowerDoom" as powerdoom
+object "Bernewfie" as bernewfie
+object "CDoom" as cdoom
+object "Fusion" as fusion
+object "ColdFusion" as coldfusion
+object "JDP" as jdp
+object "SMMU" as smmu
+object "Eternity Engine" as eternityengine
+object "Tartar" as tartar
+object "WinMBF" as winmbf
+object "Pooch" as pooch
+object "Woof!" as woof
+object "Nugget Doom" as nuggetdoom
+object "Cherry Doom" as cherrydoom
+object "PrBoom" as prboom
+object "Doom Classic (iOS)" as doomclassicios
+object "DS Doom" as dsdoom
+object "PrBoom+" as prboomplus
+object "DSDA-Doom" as dsda
+object "From DOOM With Love" as fromdoomwithlove
+object "PrBoomX" as prboomx
+object "Rockdoom" as rockdoom
+object "SvStrife" as svstrife
+object "SvStrife-plus" as svstrifeplus
+object "PrjDoom" as prjdoom
+object "Steve Boom" as steveboom
+object "DoomWorld!" as doomworld
+object "Chase" as chase
+object "CTFDoom" as ctfdoom
+object "EDGE" as edge
+object "EDGE-Classic" as edgeclassic
+object "3DGE" as 3dge
+object "Dream3DGE" as dream3dge
+object "PDoom" as pdoom
+object "Random Doom" as randomdoom
+object "sfdoom" as sfdoom
+object "Timer" as timer
+object "TASDoom" as tasdoom
+object "Risen3D" as risen3d
+object "RORDoom" as rordoom
+object "ReBoom" as reboom
+object "Rum and Raisin Doom" as rumandraisindoom
+object "64Doom" as 64doom
+object "ADoom" as adoom
+object "ADoomPPC" as adoomppc
+object "Bad Mood" as badmood
+object "Doom for NUON" as doomfornuon
+object "Doom on the Web" as doomontheweb
+object "Doom SysAdmin Tool" as doomsysadmintool
+object "Doom UEFI" as doomuefi
+object "DoomCott" as doomcott
+object "DoomDC" as doomdc
+object "nxDoom" as nxdoom
+object "ggiDoom" as ggidoom
+object "PmDoom" as pmdoom
+object "gpDoom" as gpdoom
+object "WinDoom" as windoom
+object "DoomX" as doomx
+object "glDoom" as gldoom
+object "IAS Doom" as iasdoom
+object "Doom4CE" as doom4ce
+object "Terminal DOOM" as terminaldoom
+object "csZDoom" as cszdoom
+
+
+
+object "GBADoom" as gbadoom
+object "Doom8088" as doom8088
+object "doomgeneric" as doomgeneric
+object "FROSTED DOOM" as frosteddoom
+object "fbDOOM" as fbdoom
+object "bareDOOM" as baredoom
+object "DoomNew" as doomnew
+object "DXHexen" as dxhexen
+object "Hexen (OS/2)" as hexenos2
+object "HexenDos" as hexendos
+object "Hexen32" as hexen32
+object "Linux Hexen" as linuxhexen
+object "HHexen" as hhexen
+object "SDL Hexen"  as sdlhexen
+object "U-Hexen" as uhexen
+object "WinHexen" as winhexen
+object "GLHexen" as glhexen
+object "FastDoom" as fastdoom
+object "GLOOME" as gloome
+object "GZDoom-GPL" as gzdoomgpl
+object "Managed Doom" as manageddoom
+object "Mocha Doom" as mochadoom
+object "MidDoom" as middoom
+object "Neapolitan Doom" as neapolitandoom
+object "NetDoom" as netdoom
+object "Obsidian" as obsidian
+object "PsyDoom" as psydoom
+object "RealDoom" as realdoom
+object "ReMooD" as remood
+object "rorEternity" as roreternity
+object "Sprinkled Doom" as sprinkledoom
+object "Chocolate Doom Plus" as chocolatedoomplus
+object "TASMBF" as tasmbf
+object "XFree86/OS2 Doom" as xfree86os2doom
+object "Helion" as helion
+object "AmiDoom" as amidoom
+object "AmigaDoom" as amigadoom
+object "DoomAttack" as doomattack
+object "Doom (Commodore SuperCPU)" as doomcommodore
+object "PsiDoom" as psidoom
+object "VDoom68K" as vdoom68k
+object "VDoomPPC" as vdoomppc
+object "ZhaDoom68K" as zha68k
+object "vicdoom" as vicdoom
+object "ADoom (Atari)" as adoomatari
+object "ZhaDoomPPC" as zha68kppc
+object "dsHeretic" as dsheretic
+object "WiiDoom" as wiidoom
+object "Wii-DOOM" as wii_doom
+object "Doom for Dreamcast" as doomfordc
+object "Doom PSP" as doompsp
+object "PSP Legacy" as psplegacy
+object "C2Doom" as c2doom
+object "CDoom (mobile)" as cdoommobile
+object "CellDoom" as celldoom
+object "DoomCE" as doomce
+object  "EDoom" as edoom
+object "iDoom" as idoom
+object "JLiME-Doom" as jlimedoom
+object "ZDoomZ" as zdoomz
+object "SieDOOM" as siedoom
+object "Edidoom" as edidoom
+object "nDoom" as ndoom
+
+
+adoom --> adoomppc
+adoom --> doomattack
+adoom --> vdoom68k
+adoom --> vdoomppc
+adoomppc --> doomfordc
+amigadoom --> zha68k
+amigadoom --> zha68kppc
+atbdoom --> zdoom
+boom --> linboom
+boom --> lxdoom
+boom --> mbf
+boom --> mochadoom
+boom --> prboom
+boom --> prjdoom
+boom --> reboom
+boom --> risen3d
+boom --> rordoom
+boom --> rumandraisindoom
+boom --> steveboom
+calico --> doom32xresurrection
+cdoommobile --> c2doom
+cgidoom --> gxndoom
+chocolatedoom --> chocolatedoomplus
+chocolatedoom --> chocorenderlimits
+chocolatedoom --> competitiondoom
+chocolatedoom --> crispydoom
+chocolatedoom --> doomretro
+chocolatedoom --> frosteddoom
+chocolatedoom --> obsidian
+chocolatedoom --> rumandraisindoom
+chocolatedoom --> russiandoom
+chocolatedoom --> sprinkledoom
+chocolatedoom --> strawberrydoom
+chocolatedoom --> strifeveteranedition
+chocolatedoom --> wii_doom
+chocolatedoomplus --> sprinkledoom
+chocorenderlimits --> crl
+crispydoom --> marshmallowdoom
+crispydoom --> russiandoom
+crispydoom --> sodoom
+crl --> internationaldoom
+csdoom --> odamex
+csdoom --> zdaemon
+delphidoom --> fpcdoom
+doom128 --> heretic128
+doom128 --> hexen128
+doom128 --> strife128
+doom2exe --> doom2plus
+doom2exe --> doomplus
+doom2plus --> doom32
+doom2plus --> hereticplus
+doom2plus --> hexenplus
+doom32 --> doom128
+doom32 --> sprinkledoom
+doom3d--> doom64ex
+doom64 --> doom64_2020
+doom64 --> doom64ex
+doom64ex --> doom64_2020
+doom64ex --> doom64explus
+doom64ex --> kex2
+doom64explus --> doom64superexplus
+doom95 --> hexen95
+doomanddoom2forxbox --> doomanddoom2forxbox360
+doomanddoom2forxbox360 --> doomclassic
+doomclassic --> doomclassicunity
+doomclassicunity --> doomplusdoom2
+doomdc --> nxdoom
+doomfor3do --> optidoom
+doomfor3do --> phoenixdoom
+doomgeneric --> baredoom
+doomgl --> doomgles
+doomgl --> doompc
+doomgl --> zdoomgl_v1
+doomgles --> doomppc
+doomlegacy --> edoom
+doomlegacy --> psplegacy
+doomlegacy --> remood
+doomplus --> finaldoomplus
+doomretro --> russiandoom
+doomsday --> risen3d
+doomsonyps --> doom64
+doomsonyps --> doomforsegasaturn
+doomsonyps --> finaldoomforsonyps
+doomsonyps --> psydoom
+doomv1_0 --> doomv1_1
+doomv1_1 --> doomv1_2
+doomv1_2 --> doomv1_3
+doomv1_2 --> heretic
+doomv1_2 --> jaguardoom
+doomv1_2 --> windoommicro
+doomv1_3 --> doomv1_4
+doomv1_4 --> doomv1_5
+doomv1_5 --> cgidoom
+doomv1_5 --> doomv1_666
+doomv1_666 --> doomsonyps
+doomv1_666 --> doomv1_7
+doomv1_666 --> strife
+doomv1_7 --> doomv1_7a
+doomv1_7a --> doomv1_8
+doomv1_8 --> doomv1_9
+doomv1_8 --> windoom18
+doomv1_9 --> ultimate
+doomvanille --> russiandoom
+doomworld --> steveboom
+dosdoom --> chase
+dosdoom --> ctfdoom
+dosdoom --> doomlegacy
+dosdoom --> doomworld
+dosdoom --> edge 
+dosdoom --> linboom
+dosdoom --> middoom
+dosdoom --> pdoom
+dosdoom --> randomdoom
+dosdoom --> sfdoom
+dosdoom --> timer
+dsda --> fromdoomwithlove
+edge --> 3dge
+edge --> dream3dge
+edge --> edgeclassic
+eternityengine --> roreternity
+eternityengine --> tartar
+fbdoom --> doomgeneric
+final --> boom
+final --> doomgl
+final --> finalanthology
+finalanthology --> chexquest
+finalanthology --> linuxdoom
+frosteddoom --> fbdoom
+fusion --> coldfusion
+gamesrcverrecreation --> doomvanille
+gamesrcverrecreation --> fastdoom
+gamesrcverrecreation --> heretic128
+gamesrcverrecreation --> hexen128
+gamesrcverrecreation --> realdoom
+gamesrcverrecreation --> russiandoom
+gamesrcverrecreation --> strife128
+gbadoom --> doom8088
+glheretic --> doomgl
+gz3doom --> vivedoom
+gzdoom -->  lzdoom
+gzdoom --> freedoom
+gzdoom --> gloome
+gzdoom --> gz3doom
+gzdoom --> gzdoomforosx
+gzdoom --> gzdoomgpl
+gzdoom --> gzdoomvintage
+gzdoom --> k8vavoom
+gzdoom --> qzdoom
+gzdoom --> scoredoom
+gzdoom --> skulltag
+gzdoom --> towertofbabel
+gzdoom --> vkdoom
+gzdoomvintage -->  lzdoom
+heretic --> chocolatedoom
+heretic --> delphidoom
+heretic --> doomlegacy
+heretic --> dsheretic
+heretic --> gamesrcverrecreation
+heretic --> glheretic
+heretic --> hexen
+heretic --> hexetic
+heretic --> hheretic
+heretic --> jheretic
+heretic --> linuxheretic
+heretic --> vavoom
+heretic --> wheretic
+heretic --> winheretic
+heretic --> zdoom
+hereticexe --> heretic128
+hereticexe --> hereticplus
+hexen -->  uhexen
+hexen --> bernewfie
+hexen --> chocolatedoom
+hexen --> dxhexen
+hexen --> gamesrcverrecreation
+hexen --> hexen95
+hexen --> hexenapplemacintosh
+hexen --> hexendos
+hexen --> hexennintendo64
+hexen --> hexenos2
+hexen --> hexensegasaturn
+hexen --> hexensonyps
+hexen --> hexetic
+hexen --> jhexen
+hexen --> linuxhexen
+hexen --> vavoom
+hexen --> winhexen
+hexen --> zdoom
+hexendos --> hexen32
+hexenexe --> hexen128
+hexenexe --> hexenplus
+idtech4 --> doomclassic
+idtech4 --> terminaldoom
+jaguardoom --> calico
+jaguardoom --> doom32xresurrection
+jaguardoom --> doomfor3do
+jaguardoom --> doomforgameboyadvance
+jaguardoom --> doomforsegas32x
+jaguardoom --> doomsonyps
+jdoom --> doomsday
+jheretic --> doomsday
+jhexen --> doomsday
+jhexen --> netdoom
+kex2 --> kex3
+kex3 --> doom64_2020
+kex3 --> doomplusdoom2
+linuxdoom -->  amidoom
+linuxdoom --> 64doom
+linuxdoom --> adoom
+linuxdoom --> atbdoom
+linuxdoom --> baredoom
+linuxdoom --> cdoom
+linuxdoom --> celldoom
+linuxdoom --> chocolatedoom
+linuxdoom --> delphidoom
+linuxdoom --> doom3d
+linuxdoom --> doomacornriscos
+linuxdoom --> doomanddoom2forxbox
+linuxdoom --> doomattack
+linuxdoom --> doomce
+linuxdoom --> doomcommodore
+linuxdoom --> doomcott
+linuxdoom --> doomdc
+linuxdoom --> doomfornuon
+linuxdoom --> doomnew
+linuxdoom --> doomontheweb
+linuxdoom --> doomuefi
+linuxdoom --> doomvanille
+linuxdoom --> dosdoom
+linuxdoom --> edidoom
+linuxdoom --> gamesrcverrecreation
+linuxdoom --> ggidoom
+linuxdoom --> idoom
+linuxdoom --> jdoom
+linuxdoom --> manageddoom
+linuxdoom --> mochadoom
+linuxdoom --> ndoom
+linuxdoom --> neapolitandoom
+linuxdoom --> ntdoom
+linuxdoom --> pmdoom
+linuxdoom --> psidoom
+linuxdoom --> sdldoom 
+linuxdoom --> siedoom
+linuxdoom --> terminaldoom
+linuxdoom --> vavoom
+linuxdoom --> vicdoom
+linuxdoom --> windoom
+linuxdoom --> xdoom
+linuxdoom --> xfree86os2doom
+linuxdoom --> zdoom
+linuxdoom --> zdoomz
+linuxdoom ->  amigadoom
+linuxdoom--> badmood
+linuxhexen --> hhexen
+linuxhexen --> sdlhexen
+lsdl --> lsdlps2
+lsdl --> powerdoom
+lsdl --> prboom
+lxdoom --> lsdl
+lxdoom --> prboom
+mbf --> bernewfie
+mbf --> cdoom
+mbf --> fusion
+mbf --> jdp
+mbf --> rumandraisindoom
+mbf --> smmu
+mbf --> tasmbf
+mbf --> winmbf
+ntdoom --> wdmp
+ntdoom --> zdoom
+nuggetdoom --> cherrydoom
+pmdoom --> gpdoom
+prboom --> doomclassicios
+prboom --> dsda
+prboom --> gbadoom
+prboom --> netdoom
+prboom --> prboomplus
+prboom --> prboomx
+prboom --> rockdoom
+prboom --> svstrife
+prboom --> wiidoom
+prboom -->dsdoom
+prboomplus --> svstrifeplus
+quake --> vavoom
+rumandraisindoom --> doomplusdoom2
+russiandoom --> internationaldoom
+russiandoom --> russian2023
+scoredoom --> scoredoomst
+sdldoom --> cdoommobile
+sdldoom --> doomlegacy 
+sdldoom --> doompsp
+sdldoom --> jlimedoom
+skulltag --> scoredoomst
+skulltag --> zandronum
+smmu --> eternityengine
+steveboom --> prjdoom
+strife --> chocolatedoom
+strife --> svstrife
+strife --> vavoom
+strife --> zdoom
+strife1exe --> strife128
+svstrife --> svstrifeplus
+timer --> tasdoom
+ultimate --> final
+unity --> doomclassicunity
+vavoom --> k8vavoom
+vicdoom --> adoomatari
+windoom --> doom4ce
+windoom --> doomx
+windoom --> gldoom
+windoom --> iasdoom
+windoom --> netdoom
+windoom18 --> doom95
+windoommicro --> windoom18
+winhexen --> glhexen
+winmbf --> pooch
+winmbf --> woof
+woof --> nuggetdoom
+xdoom --> doomsysadmintool
+zandronum --> cszdoom
+zandronum --> qzandronum
+zdaemon --> x_doom
+zdaemon --> zdaemongl
+zdoom --> bzdoom
+zdoom --> csdoom
+zdoom --> gzdoom
+zdoom --> mandoom
+zdoom --> skulltag
+zdoom --> zdaemon
+zdoom --> zdaemongl
+zdoom --> zdoomgl_v1
+zdoomgl_v1 --> zdoomgl_v2
+zdoomgl_v2 --> scoredoomst
+zdoomgl_v2 --> skulltag
+zdoomgl_v2 --> zdaemongl
+@enduml
