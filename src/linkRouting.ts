@@ -2,7 +2,6 @@ import {
   NODE_WIDTH,
   NODE_HEIGHT,
   PADDING_BETWEEN_NODES_X,
-  PADDING_BETWEEN_NODES_Y,
 } from "./constants";
 import type { LayoutLink, LayoutNode } from "./types";
 import { sampleSCurve } from "./geometry";
@@ -30,7 +29,10 @@ export function routeLinksAroundNodes(
     const link = links[i];
 
     const dx = link.targetX - link.sourceX;
-    if (Math.abs(dx) < horizontalSkipThreshold) {
+    const dy = link.targetY - link.sourceY;
+    const isHorizontal = Math.abs(dy) < 1e-3;
+
+    if (!isHorizontal && Math.abs(dx) < horizontalSkipThreshold) {
       continue;
     }
 
@@ -44,22 +46,22 @@ export function routeLinksAroundNodes(
       continue;
     }
 
-    const blockingNodes = collectBlockingNodes(
-      link,
-      candidates,
-      marginX,
-      baseMarginY
-    );
+    const blockingNodes = isHorizontal
+      ? collectBlockingNodesHorizontal(link, candidates, marginX, baseMarginY)
+      : collectBlockingNodes(link, candidates, marginX, baseMarginY);
 
     if (!blockingNodes.length) {
       continue;
     }
 
-    const waypoints = buildWaypointsForLink(
-      link,
-      blockingNodes,
-      baseMarginY
-    );
+    const waypoints = isHorizontal
+      ? buildWaypointsForHorizontalLink(
+          link,
+          blockingNodes,
+          candidates,
+          baseMarginY
+        )
+      : buildWaypointsForLink(link, blockingNodes, baseMarginY);
 
     if (!waypoints.length) {
       continue;
@@ -147,6 +149,41 @@ function collectBlockingNodes(
   return blockingNodes;
 }
 
+function collectBlockingNodesHorizontal(
+  link: LayoutLink,
+  candidates: LayoutNode[],
+  marginX: number,
+  baseMarginY: number
+): LayoutNode[] {
+  const minX = Math.min(link.sourceX, link.targetX) - marginX;
+  const maxX = Math.max(link.sourceX, link.targetX) + marginX;
+  const verticalMargin = NODE_HEIGHT / 2 + baseMarginY;
+
+  const blockingNodes: LayoutNode[] = [];
+
+  for (let i = 0; i < candidates.length; i++) {
+    const node = candidates[i];
+    if (node.id === link.source || node.id === link.target) {
+      continue;
+    }
+
+    if (node.X < minX || node.X > maxX) {
+      continue;
+    }
+
+    const dy = Math.abs(node.Y - link.sourceY);
+    if (dy > verticalMargin) {
+      continue;
+    }
+
+    blockingNodes.push(node);
+  }
+
+  blockingNodes.sort((a, b) => a.X - b.X);
+
+  return blockingNodes;
+}
+
 function buildWaypointsForLink(
   link: LayoutLink,
   blockingNodes: LayoutNode[],
@@ -189,6 +226,61 @@ function buildWaypointsForLink(
     const verticalMargin = NODE_HEIGHT / 2 + baseMarginY;
     const waypointY = node.Y + sign * verticalMargin;
 
+    waypoints.push({
+      x: node.X,
+      y: waypointY,
+    });
+  }
+
+  waypoints.sort((a, b) => a.x - b.x);
+
+  return waypoints;
+}
+
+function chooseHorizontalWaypointDirection(
+  link: LayoutLink,
+  candidates: LayoutNode[]
+): 1 | -1 {
+  let aboveCount = 0;
+  let belowCount = 0;
+  const y = link.sourceY;
+
+  for (let i = 0; i < candidates.length; i++) {
+    const node = candidates[i];
+    if (node.id === link.source || node.id === link.target) {
+      continue;
+    }
+    if (node.Y < y) {
+      aboveCount++;
+    } else if (node.Y > y) {
+      belowCount++;
+    }
+  }
+
+  if (aboveCount > belowCount) {
+    return 1;
+  }
+
+  return -1;
+}
+
+function buildWaypointsForHorizontalLink(
+  link: LayoutLink,
+  blockingNodes: LayoutNode[],
+  candidates: LayoutNode[],
+  baseMarginY: number
+): { x: number; y: number }[] {
+  if (!blockingNodes.length) {
+    return [];
+  }
+
+  const waypoints: { x: number; y: number }[] = [];
+  const direction = chooseHorizontalWaypointDirection(link, candidates);
+  const verticalMargin = NODE_HEIGHT / 2 + baseMarginY;
+  const waypointY = link.sourceY + direction * verticalMargin;
+
+  for (let i = 0; i < blockingNodes.length; i++) {
+    const node = blockingNodes[i];
     waypoints.push({
       x: node.X,
       y: waypointY,

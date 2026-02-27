@@ -463,5 +463,46 @@
         "parents": [
             "linuxdoom1997"
         ]
+    },
+    {
+        "id" : "risen3d",
+        "name": "Risen3D",
+        "releaseDate": "2003-10-14",
+        "type": "sourceport",
+        "geneticLine": "doomsday",
+        "parents": [
+            "doomsday",
+            "boom"
+        ]
+    },
+    {
+        "id": "dxhexen",
+        "name": "DXHexen",
+        "releaseDate": "1999-07-06",
+        "type": "sourceport",
+        "geneticLine": "hexen",
+        "parents": [
+            "hexen"
+        ]
+    },
+    {
+        "id": "hexen/2",
+        "name": "Hexen (OS/2)",
+        "releaseDate": "1999-07-11",
+        "type": "sourceport",
+        "geneticLine": "hexen",
+        "parents": [
+            "hexen"
+        ]
+    },
+    {
+        "id": "hexendos",
+        "name": "HexenDos",
+        "releaseDate": "1997-04-01",
+        "type": "sourceport",
+        "geneticLine": "hexen",
+        "parents": [
+            "hexen"
+        ]
     }
 ]
