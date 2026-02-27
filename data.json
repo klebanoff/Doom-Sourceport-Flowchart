@@ -1,0 +1,467 @@
+[
+    {
+        "id": "doomv1.0",
+        "name": "Doom v1.0",
+        "type": "mainline",
+        "releaseDate": "1993-12-10",
+        "geneticLine": "official",
+        "children": [
+            "doomv1.1"
+        ]
+    },
+    {
+        "id": "doomv1.1",
+        "name": "Doom v1.1",
+        "type": "mainline",
+        "releaseDate": "1993-12-16",
+        "geneticLine": "official",
+        "children": [
+            "doomv1.2"
+        ]
+    },
+    {
+        "id": "doomv1.2",
+        "name": "Doom v1.2",
+        "type": "mainline",
+        "releaseDate": "1994-02-17",
+        "geneticLine": "official",
+        "children": [
+            "heretic",
+            "doomv1.3",
+            "windoom",
+            "jaguardoom"
+        ]
+    },
+    {
+        "id": "doomv1.3",
+        "name": "Doom v1.3",
+        "type": "mainline",
+        "releaseDate": "1994-03-28",
+        "geneticLine": "official",
+        "children": [
+            "doomv1.4"
+        ]
+    },
+    {
+        "id": "doomv1.4",
+        "name": "Doom v1.4",
+        "type": "mainline",
+        "releaseDate": "1994-04-21",
+        "geneticLine": "official",
+        "children": [
+            "doomv1.5"
+        ]
+    },
+    {
+        "id": "doomv1.5",
+        "name": "Doom v1.5",
+        "type": "mainline",
+        "releaseDate": "1994-06-08",
+        "geneticLine": "official",
+        "children": [
+            "cgidoom",
+            "doomv1.666"
+        ]
+    },
+    {
+        "id": "cgidoom",
+        "name": "CGI Doom",
+        "type": "official",
+        "releaseDate": "1994-07-01",
+        "geneticLine": "official",
+        "children": [
+            "qnxdoom"
+        ]
+    },
+    {
+        "id": "qnxdoom",
+        "name": "QNX Doom",
+        "type": "official",
+        "releaseDate": "1995-06-13",
+        "geneticLine": "official"
+    },
+    {
+        "id": "doomv1.666",
+        "name": "Doom v1.666",
+        "type": "mainline",
+        "releaseDate": "1994-09-30",
+        "geneticLine": "official",
+        "children": [
+            "doomv1.7",
+            "sonyplaystation"
+        ]
+    },
+    {
+        "id": "doomv1.7",
+        "name": "Doom v1.7",
+        "type": "mainline",
+        "releaseDate": "1994-10-11",
+        "geneticLine": "official",
+        "children": [
+            "doomv1.7a"
+        ]
+    },
+    {
+        "id": "doomv1.7a",
+        "name": "Doom v1.7a",
+        "type": "mainline",
+        "releaseDate": "1994-11-08",
+        "geneticLine": "official",
+        "children": [
+            "doomv1.8"
+        ]
+    },
+    {
+        "id": "doomv1.8",
+        "name": "Doom v1.8",
+        "type": "mainline",
+        "releaseDate": "1995-01-23",
+        "geneticLine": "official",
+        "children": [
+            "doomv1.9"
+        ]
+    },
+    {
+        "id": "doomv1.9",
+        "name": "Doom v1.9",
+        "type": "mainline",
+        "releaseDate": "1995-02-01",
+        "geneticLine": "official",
+        "children": [
+            "ultimatedoom"
+        ]
+    },
+    {
+        "id": "ultimatedoom",
+        "name": "Ultimate Doom",
+        "type": "mainline",
+        "releaseDate": "1995-04-30",
+        "geneticLine": "official",
+        "children": [
+            "finaldoom"
+        ]
+    },
+    {
+        "id": "finaldoom",
+        "name": "Final Doom",
+        "type": "mainline",
+        "releaseDate": "1996-06-17",
+        "geneticLine": "official",
+        "children": [
+            "finaldoomanthology"
+        ]
+    },
+    {
+        "id": "sonyplaystation",
+        "name": "Sony PlayStation",
+        "releaseDate": "1995-11-16",
+        "type": "official",
+        "geneticLine": "console",
+        "children": []
+    },
+    {
+        "id": "finaldoomanthology",
+        "name": "Final Doom (id Anthology)",
+        "type": "mainline",
+        "releaseDate": "1996-11-30",
+        "geneticLine": "official",
+        "children": [
+            "linuxdoom"
+        ]
+    },
+    {
+        "id": "linuxdoom",
+        "name": "Linux Doom",
+        "type": "mainline",
+        "releaseDate": "1994-01-01",
+        "geneticLine": "official",
+        "children": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "linuxdoom1997",
+        "name": "Linux Doom source release",
+        "type": "mainline",
+        "releaseDate": "1997-01-01",
+        "geneticLine": "official",
+        "children": [
+            "doomforxbox"
+        ]
+    },
+    {
+        "id": "doomforxbox",
+        "name": "Doom and Doom II for Xbox",
+        "type": "mainline",
+        "releaseDate": "2005-03-14",
+        "geneticLine": "console",
+        "children": [
+            "doomforxbox360"
+        ]
+    },
+    {
+        "id": "doomforxbox360",
+        "name": "Doom and Doom II for Xbox 360",
+        "type": "mainline",
+        "releaseDate": "2006-09-27",
+        "geneticLine": "console",
+        "children": [
+            "doomclassic"
+        ]
+    },
+    {
+        "id": "doomclassic",
+        "name": "Doom Classic",
+        "type": "mainline",
+        "releaseDate": "2012-10-16",
+        "parents": [
+            "doomforxbox360",
+            "idtech4"
+        ],
+        "geneticLine": "official"
+    },
+    {
+        "id": "idtech4",
+        "name": "id Tech 4",
+        "releaseDate": "2004-08-12",
+        "type": "unrelated",
+        "geneticLine": "official"
+    },
+    {
+        "id": "heretic",
+        "name": "Heretic",
+        "releaseDate": "1994-12-23",
+        "type": "official",
+        "geneticLine": "heretic"
+    },
+    {
+        "id": "windoom",
+        "name": "WinDoom (Microsoft)",
+        "releaseDate": "1994-06-08",
+        "type": "official",
+        "geneticLine": "official"
+    },
+    {
+        "id": "jaguardoom",
+        "name": "Jaguar Doom",
+        "releaseDate": "1994-11-28",
+        "type": "official",
+        "geneticLine": "console",
+        "children": [
+            "doomfor3do",
+            "sonyplaystation",
+            "doomforsega32x",
+            "doomforgba"
+        ]
+    },
+    {
+        "id": "doomfor3do",
+        "name": "Doom for 3DO",
+        "releaseDate": "1996-04-26",
+        "type": "official",
+        "geneticLine": "console"
+    },
+    {
+        "id": "doomforsega32x",
+        "name": "Doom for Sega 32X",
+        "releaseDate": "1994-11-21",
+        "type": "official",
+        "geneticLine": "console"
+    },
+    {
+        "id": "doomforgba",
+        "name": "Doom for Game Boy Advance",
+        "releaseDate": "2001-10-26",
+        "type": "official",
+        "geneticLine": "console"
+    },
+    {
+        "id": "windoomv1.8",
+        "name": "WinDoom v1.8",
+        "releaseDate": "1995-04-13",
+        "type": "official",
+        "geneticLine": "official",
+        "parents": [
+            "windoom"
+        ]
+    },
+    {
+        "id": "finalforsonyplaystation",
+        "name": "Final Doom for Sony PlayStation",
+        "type": "official",
+        "releaseDate": "1996-10-01",
+        "geneticLine": "console",
+        "parents": [
+            "sonyplaystation"
+        ]
+    },
+    {
+        "id": "segasaturn",
+        "name": "Doom for Sega Saturn",
+        "type": "official",
+        "releaseDate": "1997-04-26",
+        "geneticLine": "console",
+        "parents": [
+            "sonyplaystation"
+        ]
+    },
+    {
+        "id": "doom64",
+        "name": "Doom 64",
+        "type": "official",
+        "releaseDate": "1997-04-04",
+        "geneticLine": "console",
+        "parents": [
+            "sonyplaystation"
+        ]
+    },
+    {
+        "id": "doom642020",
+        "name": "Doom 64 (2020)",
+        "type": "official",
+        "releaseDate": "2020-03-20",
+        "geneticLine": "console",
+        "parents": [
+            "doom64"
+        ]
+    },
+    {
+        "id": "hexen",
+        "name": "Hexen",
+        "releaseDate": "1995-10-30",
+        "type": "official",
+        "geneticLine": "hexen",
+        "parents": [
+            "heretic"
+        ]
+    },
+    {
+        "id" : "hexenapplemacintosh",
+        "name": "Hexen (Apple Macintosh)",
+        "releaseDate": "1996-06-27",
+        "type": "official",
+        "geneticLine": "hexen",
+        "parents": [
+            "hexen"
+        ]
+    },
+    {
+        "id" : "hexennintendo64",
+        "name": "Hexen (Nintendo 64)",
+        "releaseDate": "1997-06-25",
+        "type": "console",
+        "geneticLine": "hexen",
+        "parents": [
+            "hexen"
+        ]
+    },
+    {
+        "id" : "hexensegasaturn",
+        "name": "Hexen (Sega Saturn)",
+        "releaseDate": "1997-04-30",
+        "type": "console",
+        "geneticLine": "hexen",
+        "parents": [
+            "hexen"
+        ]
+    },
+    {
+        "id" : "hexensonyplaystation",
+        "name": "Hexen (Sony PlayStation)",
+        "releaseDate": "1997-03-15",
+        "type": "console",
+        "geneticLine": "hexen",
+        "parents": [
+            "hexen"
+        ]
+    },
+    {
+        "id" : "hexen95",
+        "name": "Hexen95",
+        "releaseDate": "1997-11-18",
+        "type": "official",
+        "geneticLine": "hexen",
+        "parents": [
+            "hexen",
+            "doom95"
+        ]
+    },
+    {
+        "id": "berenewfie",
+        "name": "Berenewfie",
+        "type": "sourceport",
+        "releaseDate": "2023-12-10",
+        "geneticLine": "hexen",
+        "parents": [
+            "hexen",
+            "mbf"
+        ]
+    },
+    {
+        "id" : "chocolatehexen",
+        "name": "Chocolate Hexen",
+        "releaseDate": "2013-12-23",
+        "type": "sourceport",
+        "geneticLine": "hexen",
+        "parents": [
+            "hexen",
+            "chocolatedoom"
+        ]
+    },
+    {
+        "id" : "delpidoom",
+        "name": "DelpiDoom",
+        "releaseDate": "2005-02-07",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997",
+            "heretic",
+            "hexen",
+            "strife",
+            "chexquest"
+        ]
+    },
+    {
+        "id": "doomsday",
+        "name": "Doomsday",
+        "releaseDate": "2002-03-10",
+        "type": "sourceport",
+        "geneticLine": "doomsday",
+        "parents": [
+            "jhexen",
+            "jheretic",
+            "jdoom"
+        ]
+    },
+    {
+        "id" : "jhexen",
+        "name": "JHexen",
+        "releaseDate": "1999-11-01",
+        "type": "sourceport",
+        "geneticLine": "doomsday",
+        "parents": [
+            "hexen"
+        ]
+    },
+    {
+        "id" : "jheretic",
+        "name": "JHeretic",
+        "releaseDate": "2000-03-20",
+        "type": "sourceport",
+        "geneticLine": "doomsday",
+        "parents": [
+            "heretic"
+        ]
+    },
+    {
+        "id" : "jdoom",
+        "name": "JDoom",
+        "releaseDate": "2000-05-31",
+        "type": "sourceport",
+        "geneticLine": "doomsday",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    }
+]
