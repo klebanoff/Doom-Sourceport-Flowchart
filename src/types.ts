@@ -1,0 +1,77 @@
+export type DoomNodeType = "mainline" | "official" | "unrelated" | "console";
+
+export type GeneticLine =
+  | "official"
+  | "heretic"
+  | "hexen"
+  | "console"
+  | "sourceport"
+  | "boom"
+  | "zdoom"
+  | "chocolate"
+  | "eternity"
+  | "dosdoom"
+  | "doomsday"
+  | "vavoom"
+  | "other";
+
+export interface DoomNode {
+  id: string;
+  name: string;
+  type: DoomNodeType;
+  releaseDate: string;
+  geneticLine: GeneticLine;
+  children?: string[];
+  parents?: string[];
+}
+
+export type DoomData = DoomNode[];
+
+export interface LayoutNode extends DoomNode {
+  _dateValue: number;
+  _laneKey: string;
+  _rowIndex: number;
+  X: number;
+  Y: number;
+}
+
+export interface LayoutLink {
+  source: string;
+  sourceX: number;
+  sourceY: number;
+  target: string;
+  targetX: number;
+  targetY: number;
+  isPrimary: boolean;
+  waypoints?: { x: number; y: number }[];
+}
+
+export interface LayoutLane {
+  key: string;
+  index: number;
+  rowCount: number;
+  top: number;
+  bottom: number;
+  yCenter: number;
+}
+
+export interface TimelineMarker {
+  year: number;
+  x: number;
+}
+
+export interface LayoutResult {
+  nodes: LayoutNode[];
+  links: LayoutLink[];
+  lanes: LayoutLane[];
+  timelineMarkers: TimelineMarker[];
+}
+
+export interface CameraLike {
+  offsetX: number;
+  offsetY: number;
+  scale: number;
+  worldToScreen(x: number, y: number): [number, number];
+  screenToWorld(x: number, y: number): [number, number];
+}
+
