@@ -36,13 +36,87 @@ export function drawScene(
   ctx: CanvasRenderingContext2D,
   canvas: HTMLCanvasElement,
   camera: CameraLike,
-  render: LayoutResult
+  render: LayoutResult,
+  hoveredNodeId: string | null
 ): void {
   const nodeSizeX = NODE_WIDTH;
   const nodeSizeY = NODE_HEIGHT;
   const paddingBetweenNodesX = PADDING_BETWEEN_NODES_X;
   const scale = camera.scale;
   const worldToScreen = (x: number, y: number) => camera.worldToScreen(x, y);
+
+  const hoveredId = hoveredNodeId;
+  const relatedNodeIds = new Set<string>();
+
+  if (hoveredId) {
+    for (let i = 0; i < render.links.length; i++) {
+      const link = render.links[i];
+      if (link.source === hoveredId) {
+        relatedNodeIds.add(link.target);
+      } else if (link.target === hoveredId) {
+        relatedNodeIds.add(link.source);
+      }
+    }
+    relatedNodeIds.add(hoveredId);
+  }
+
+  const snappedScreenPositions = new Map<string, { x: number; y: number }>();
+
+  if (hoveredId) {
+    const hoveredNode = render.nodes.find((n) => n.id === hoveredId);
+    if (hoveredNode) {
+      const [hoveredScreenX, hoveredScreenY] = worldToScreen(
+        hoveredNode.X,
+        hoveredNode.Y
+      );
+      const screenWidth = canvas.width;
+      const screenHeight = canvas.height;
+      const edgeMargin = 20;
+      const halfNodeWidthScreen = (nodeSizeX * scale) / 2;
+      const halfNodeHeightScreen = (nodeSizeY * scale) / 2;
+      const minX = edgeMargin + halfNodeWidthScreen;
+      const maxX = screenWidth - edgeMargin - halfNodeWidthScreen;
+      const minY = edgeMargin + halfNodeHeightScreen;
+      const maxY = screenHeight - edgeMargin - halfNodeHeightScreen;
+
+      for (const nodeId of relatedNodeIds) {
+        if (nodeId === hoveredId) {
+          continue;
+        }
+
+        const node = render.nodes.find((n) => n.id === nodeId);
+        if (!node) {
+          continue;
+        }
+
+        const [nodeScreenX, nodeScreenY] = worldToScreen(node.X, node.Y);
+
+        if (
+          nodeScreenX >= 0 &&
+          nodeScreenX <= screenWidth &&
+          nodeScreenY >= 0 &&
+          nodeScreenY <= screenHeight
+        ) {
+          continue;
+        }
+
+        const intersection = intersectSegmentWithRect(
+          hoveredScreenX,
+          hoveredScreenY,
+          nodeScreenX,
+          nodeScreenY,
+          minX,
+          minY,
+          maxX,
+          maxY
+        );
+
+        if (intersection) {
+          snappedScreenPositions.set(node.id, intersection);
+        }
+      }
+    }
+  }
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -95,17 +169,6 @@ export function drawScene(
       ctx.font = `${144 * scale}px sans-serif`;
       ctx.fillText(laneLabel, labelX, labelY);
       ctx.restore();
-
-      // Крупный фон-лейбл по центру дорожки
-      // const [centerX, centerY] = worldToScreen(worldCenterX, lane.yCenter);
-      // ctx.save();
-      // ctx.globalAlpha = 0.45;
-      // ctx.fillStyle = labelColor;
-      // ctx.textAlign = "center";
-      // ctx.textBaseline = "middle";
-      // ctx.font = `${72 * scale}px sans-serif`;
-      // ctx.fillText(laneLabel.toUpperCase(), centerX, centerY);
-      // ctx.restore();
     }
   }
 
@@ -144,9 +207,9 @@ export function drawScene(
     ctx.fillStyle = "#000000";
     ctx.textAlign = "center";
     ctx.textBaseline = "bottom";
-    ctx.font = `${14 * scale}px sans-serif`;
+    ctx.font = `${20 * scale}px sans-serif`;
 
-    const yearLabelScreenY = 20;
+    const yearLabelScreenY = 24;
 
     ctx.beginPath();
     ctx.moveTo(axisStartX, axisScreenY);
@@ -174,6 +237,7 @@ export function drawScene(
       geneticLines.official,
       geneticLines.heretic,
       geneticLines.hexen,
+      geneticLines.strife,
       geneticLines.console,
       geneticLines.boom,
       geneticLines.zdoom,
@@ -221,12 +285,34 @@ export function drawScene(
     let [startX, startY] = worldToScreen(line.sourceX, line.sourceY);
     let [endX, endY] = worldToScreen(line.targetX, line.targetY);
 
+    const snappedSource = snappedScreenPositions.get(line.source);
+    if (snappedSource) {
+      startX = snappedSource.x;
+      startY = snappedSource.y;
+    }
+
+    const snappedTarget = snappedScreenPositions.get(line.target);
+    if (snappedTarget) {
+      endX = snappedTarget.x;
+      endY = snappedTarget.y;
+    }
+
     const parentNode = render.nodes.find((n) => n.id === line.source);
     const laneKey =
       parentNode && parentNode._laneKey ? parentNode._laneKey : "other";
     const colors = getLaneColors(laneKey);
 
+    const hasHover = !!hoveredId;
+    const isHoveredLink =
+      !!hoveredId &&
+      (line.source === hoveredId || line.target === hoveredId);
+
     ctx.save();
+
+    if (hasHover && !isHoveredLink) {
+      ctx.globalAlpha = 0.3;
+    }
+
     ctx.beginPath();
 
     const waypoints = line.waypoints ?? [];
@@ -272,19 +358,32 @@ export function drawScene(
     ctx.setLineDash(
       line.isPrimary ? [] : [10 * scale, 6 * scale]
     );
-    ctx.lineWidth = line.isPrimary ? 3 * scale : 1.5 * scale;
-    ctx.strokeStyle = colors.stroke;
+
+    let lineWidth = line.isPrimary ? 3 * scale : 1.5 * scale;
+    if (isHoveredLink) {
+      lineWidth = line.isPrimary ? 4 * scale : 3 * scale;
+    }
+
+    const strokeColor = isHoveredLink
+      ? darkenColor(colors.stroke, 0.7)
+      : colors.stroke;
+
+    ctx.lineWidth = lineWidth;
+    ctx.strokeStyle = strokeColor;
     ctx.stroke();
     ctx.restore();
   }
 
   function renderNode(node: LayoutNode): void {
-    let x = node.X - nodeSizeX / 2;
-    let y = node.Y - nodeSizeY / 2;
-    [x, y] = worldToScreen(x, y);
-    let textX = node.X;
-    let textY = node.Y;
-    [textX, textY] = worldToScreen(textX, textY);
+    let centerX = node.X;
+    let centerY = node.Y;
+    [centerX, centerY] = worldToScreen(centerX, centerY);
+
+    const snapped = snappedScreenPositions.get(node.id);
+    if (snapped) {
+      centerX = snapped.x;
+      centerY = snapped.y;
+    }
 
     let fillStyle = "#FFFFFF";
     let strokeStyle = "#000000";
@@ -310,19 +409,27 @@ export function drawScene(
         break;
     }
 
-    ctx.save();
-    ctx.setLineDash(dash);
-    ctx.fillStyle = fillStyle;
-    ctx.strokeStyle = strokeStyle;
-    ctx.lineWidth = 2 * scale;
-    ctx.shadowColor = "rgba(0, 0, 0, 0.2)";
-    ctx.shadowBlur = 10 * scale;
-    ctx.shadowOffsetX = 2 * scale;
-    ctx.shadowOffsetY = 2 * scale;
+    const hasHover = !!hoveredId;
+    const isHovered = hoveredId === node.id;
+    const isRelated = relatedNodeIds.has(node.id) && !isHovered;
+    const isDimmed = hasHover && !isHovered && !isRelated;
 
     const width = nodeSizeX * scale;
     const height = nodeSizeY * scale;
     const radius = 10 * scale;
+    const x = centerX - width / 2;
+    const y = centerY - height / 2;
+
+    ctx.save();
+    ctx.setLineDash(dash);
+    ctx.fillStyle = fillStyle;
+    ctx.strokeStyle = strokeStyle;
+    ctx.lineWidth = (isHovered ? 3 : 2) * scale;
+    ctx.shadowColor = "rgba(0, 0, 0, 0.2)";
+    ctx.shadowBlur = isHovered ? 20 * scale : isRelated ? 14 * scale : 10 * scale;
+    ctx.shadowOffsetX = 2 * scale;
+    ctx.shadowOffsetY = 2 * scale;
+    ctx.globalAlpha = isDimmed ? 0.3 : 1;
 
     ctx.beginPath();
     if (typeof (ctx as any).roundRect === "function") {
@@ -340,7 +447,8 @@ export function drawScene(
     ctx.font = `${fontSize}px sans-serif`;
     ctx.fillStyle = "#000000";
     ctx.textAlign = "center";
-    wrapText(ctx, node.name, textX, textY, nodeSizeX * scale, fontSize);
+    ctx.globalAlpha = isDimmed ? 0.3 : 1;
+    wrapText(ctx, node.name, centerX, centerY, nodeSizeX * scale, fontSize);
     ctx.restore();
   }
 
@@ -378,5 +486,76 @@ export function drawScene(
       context.fillText(row.line, row.x, row.y - moveTextUp);
     }
   }
-}
 
+  function intersectSegmentWithRect(
+    ax: number,
+    ay: number,
+    bx: number,
+    by: number,
+    minX: number,
+    minY: number,
+    maxX: number,
+    maxY: number
+  ): { x: number; y: number } | null {
+    const dx = bx - ax;
+    const dy = by - ay;
+    let closestT = Number.POSITIVE_INFINITY;
+    let hitX = 0;
+    let hitY = 0;
+
+    const tryIntersect = (
+      t: number,
+      xConstraint: (x: number) => boolean,
+      yConstraint: (y: number) => boolean
+    ) => {
+      if (t < 0 || t > 1 || t >= closestT) {
+        return;
+      }
+      const x = ax + dx * t;
+      const y = ay + dy * t;
+      if (xConstraint(x) && yConstraint(y)) {
+        closestT = t;
+        hitX = x;
+        hitY = y;
+      }
+    };
+
+    if (dx !== 0) {
+      const tLeft = (minX - ax) / dx;
+      tryIntersect(
+        tLeft,
+        (x) => x >= minX - 1e-3 && x <= minX + 1e-3,
+        (y) => y >= minY && y <= maxY
+      );
+
+      const tRight = (maxX - ax) / dx;
+      tryIntersect(
+        tRight,
+        (x) => x >= maxX - 1e-3 && x <= maxX + 1e-3,
+        (y) => y >= minY && y <= maxY
+      );
+    }
+
+    if (dy !== 0) {
+      const tTop = (minY - ay) / dy;
+      tryIntersect(
+        tTop,
+        (x) => x >= minX && x <= maxX,
+        (y) => y >= minY - 1e-3 && y <= minY + 1e-3
+      );
+
+      const tBottom = (maxY - ay) / dy;
+      tryIntersect(
+        tBottom,
+        (x) => x >= minX && x <= maxX,
+        (y) => y >= maxY - 1e-3 && y <= maxY + 1e-3
+      );
+    }
+
+    if (!Number.isFinite(closestT)) {
+      return null;
+    }
+
+    return { x: hitX, y: hitY };
+  }
+}

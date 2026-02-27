@@ -1,6 +1,9 @@
 import { geneticLines } from "./constants";
 
 export const LANE_ORDER: string[] = [
+  geneticLines.heretic,
+  geneticLines.hexen,
+  geneticLines.strife,
   geneticLines.dosdoom,
   geneticLines.doomsday,
   geneticLines.vavoom,
@@ -10,8 +13,6 @@ export const LANE_ORDER: string[] = [
   geneticLines.boom,
   geneticLines.sourceport,
   "other",
-  geneticLines.heretic,
-  geneticLines.hexen,
   geneticLines.console,
   geneticLines.official,
 ];
@@ -24,6 +25,8 @@ export function getLaneDisplayName(key: string): string {
       return "Heretic";
     case geneticLines.hexen:
       return "Hexen";
+    case geneticLines.strife:
+      return "Strife";
     case geneticLines.console:
       return "Console";
     case geneticLines.boom:
@@ -57,6 +60,8 @@ export function getLaneColors(
       return { background: "#E6F5FF", stroke: "#0066CC" };
     case geneticLines.hexen:
       return { background: "#EDE6FF", stroke: "#5E35B1" };
+    case geneticLines.strife:
+      return { background: "#FFE6F5", stroke: "#AD1457" };
     case geneticLines.console:
       return { background: "#E6FFF4", stroke: "#00796B" };
     case geneticLines.boom:

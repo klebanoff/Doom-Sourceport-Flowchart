@@ -4,6 +4,7 @@ import { drawScene } from "./renderer";
 import { setupInputHandlers } from "./input";
 import type { DoomData } from "./types";
 import { simpleCrossLaneSample } from "./devSamples";
+import { NODE_HEIGHT, NODE_WIDTH } from "./constants";
 
 async function loadDataJson(): Promise<DoomData | null> {
   try {
@@ -56,12 +57,46 @@ async function init(): Promise<void> {
   }
 
   let render = computeLayout(data);
+  let hoveredNodeId: string | null = null;
 
-  const draw = () => {
-    drawScene(ctx, canvas, camera, render);
+  const getNodeIdAtWorldPosition = (worldX: number, worldY: number): string | null => {
+    const halfWidth = NODE_WIDTH / 2;
+    const halfHeight = NODE_HEIGHT / 2;
+
+    for (let i = 0; i < render.nodes.length; i++) {
+      const node = render.nodes[i];
+      const minX = node.X - halfWidth;
+      const maxX = node.X + halfWidth;
+      const minY = node.Y - halfHeight;
+      const maxY = node.Y + halfHeight;
+
+      if (worldX >= minX && worldX <= maxX && worldY >= minY && worldY <= maxY) {
+        return node.id;
+      }
+    }
+
+    return null;
   };
 
-  setupInputHandlers(canvas, camera, draw);
+  const getNodeIdAtScreenPosition = (screenX: number, screenY: number): string | null => {
+    const [worldX, worldY] = camera.screenToWorld(screenX, screenY);
+    return getNodeIdAtWorldPosition(worldX, worldY);
+  };
+
+  const draw = () => {
+    drawScene(ctx, canvas, camera, render, hoveredNodeId);
+  };
+
+  const handleHoverChange = (id: string | null) => {
+    if (hoveredNodeId === id) {
+      return;
+    }
+
+    hoveredNodeId = id;
+    draw();
+  };
+
+  setupInputHandlers(canvas, camera, draw, getNodeIdAtScreenPosition, handleHoverChange);
   draw();
 
   if (!useDevSample) {
@@ -80,6 +115,7 @@ async function init(): Promise<void> {
 
       lastSerialized = serialized;
       render = computeLayout(next);
+      hoveredNodeId = null;
       draw();
     }, 5000);
   }

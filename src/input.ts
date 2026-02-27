@@ -9,13 +9,16 @@ type DrawCallback = () => void;
 export function setupInputHandlers(
   canvas: HTMLCanvasElement,
   camera: CameraLike,
-  onDraw: DrawCallback
+  onDraw: DrawCallback,
+  getNodeIdAtScreenPosition: (x: number, y: number) => string | null,
+  onHoverNodeChange: (id: string | null) => void
 ): void {
   let prevMouseX = 0;
   let prevMouseY = 0;
   let touchMode: TouchMode = "single";
   const prevTouch: [TouchLike | null, TouchLike | null] = [null, null];
   let touching = false;
+  let currentHoveredId: string | null = null;
 
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -42,6 +45,16 @@ export function setupInputHandlers(
     onDraw();
   };
 
+  function updateHover(screenX: number, screenY: number): void {
+    const id = getNodeIdAtScreenPosition(screenX, screenY);
+    if (id === currentHoveredId) {
+      return;
+    }
+
+    currentHoveredId = id;
+    onHoverNodeChange(id);
+  }
+
   function handlePointerDown(e: MouseEvent | TouchEvent): void {
     touching = true;
     let x = 0;
@@ -59,10 +72,10 @@ export function setupInputHandlers(
     }
     prevMouseX = x;
     prevMouseY = y;
+    updateHover(x, y);
   }
 
   function handlePointerMove(e: MouseEvent | TouchEvent): void {
-    if (!touching) return;
     let x = 0;
     let y = 0;
     if (e.type === "touchmove") {
@@ -76,6 +89,10 @@ export function setupInputHandlers(
       x = mouseEvent.clientX;
       y = mouseEvent.clientY;
     }
+
+    updateHover(x, y);
+
+    if (!touching) return;
 
     camera.offsetX -= (x - prevMouseX) / camera.scale;
     camera.offsetY -= (y - prevMouseY) / camera.scale;

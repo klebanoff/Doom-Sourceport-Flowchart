@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "start": "bun --hot index.ts",
-    "typecheck": "bun x tsc --noEmit"
+    "typecheck": "bun x tsc --noEmit",
+    "validate:data": "bun scripts/validateData.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"

@@ -196,7 +196,7 @@ export function computeLayout(data: DoomData): LayoutResult {
   return result;
 }
 
-function normalizeDoomData(data: DoomData): DoomData {
+export function normalizeDoomData(data: DoomData): DoomData {
   const byId = new Map<string, DoomData[number]>();
   const normalized: DoomData = [];
 
