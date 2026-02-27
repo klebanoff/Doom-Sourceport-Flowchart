@@ -1365,7 +1365,7 @@
     {
         "id": "badmood",
         "name": "Bad Mood",
-        "releaseDate": "1995-11-01",
+        "releaseDate": "1997-11-01",
         "type": "sourceport",
         "geneticLine": "sourceport",
         "parents": [
@@ -1375,7 +1375,7 @@
     {
         "id": "cdoom",
         "name": "CDoom",
-        "releaseDate": "1995-11-01",
+        "releaseDate": "1997-11-01",
         "type": "sourceport",
         "geneticLine": "sourceport",
         "parents": [
@@ -1385,7 +1385,7 @@
     {
         "id": "cdoomv2",
         "name": "CDoom v2",
-        "releaseDate": "1995-11-01",
+        "releaseDate": "1997-11-01",
         "type": "sourceport",
         "geneticLine": "sourceport",
         "parents": [
@@ -1402,6 +1402,88 @@
         "parents": [
             "cdoom",
             "mbf"
+        ]
+    },
+    {
+        "id": "doomontheweb",
+        "name": "Doom on the Web",
+        "releaseDate": "2011-06-02",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "doomsysadmintool",
+        "name": "Doom SysAdmin Tool",
+        "releaseDate": "1999-10-17",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "xdoom"
+        ]
+    },
+    {
+        "id": "xdoom",
+        "name": "XDoom",
+        "releaseDate": "1998-10-17",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "doomuefi",
+        "name": "Doom UEFI",
+        "releaseDate": "2019-12-27",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "doomcott",
+        "name": "DoomCott",
+        "releaseDate": "2002-03-21",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "boom",
+        "name": "Boom",
+        "releaseDate": "1998-04-17",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "finaldoom",
+            "dosdoom"
+        ]
+    },
+    {
+        "id": "linboom",
+        "name": "LinBoom",
+        "releaseDate": "1998-05-30",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "boom",
+            "dosdoom"
+        ]
+    },
+    {
+        "id": "lxdoom",
+        "name": "LxDoom",
+        "releaseDate": "1998-09-23",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "boom"
         ]
     }
 
