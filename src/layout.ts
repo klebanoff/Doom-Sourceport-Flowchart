@@ -16,6 +16,8 @@ export function computeLayout(data: DoomData): LayoutResult {
 
   const laneOrder = LANE_ORDER;
 
+  const normalized = normalizeDoomData(data);
+
   const result: LayoutResult = {
     nodes: [],
     links: [],
@@ -23,41 +25,7 @@ export function computeLayout(data: DoomData): LayoutResult {
     timelineMarkers: [],
   };
 
-  data.forEach((element) => {
-    if (!element.children) {
-      element.children = [];
-    }
-    if (!element.parents) {
-      element.parents = [];
-    }
-  });
-
-  data.forEach((element) => {
-    if (element.children && element.children.length > 0) {
-      element.children.forEach((child) => {
-        const childNode = data.find((x) => x.id === child);
-        if (childNode && !childNode.parents?.includes(element.id)) {
-          if (!childNode.parents) {
-            childNode.parents = [];
-          }
-          childNode.parents.push(element.id);
-        }
-      });
-    }
-    if (element.parents && element.parents.length > 0) {
-      element.parents.forEach((parent) => {
-        const parentNode = data.find((x) => x.id === parent);
-        if (parentNode && !parentNode.children?.includes(element.id)) {
-          if (!parentNode.children) {
-            parentNode.children = [];
-          }
-          parentNode.children.push(element.id);
-        }
-      });
-    }
-  });
-
-  const augmented: LayoutNode[] = data.map((node) => {
+  const augmented: LayoutNode[] = normalized.map((node) => {
     const date = new Date(node.releaseDate);
     const _dateValue = date.getTime();
     return {
@@ -226,5 +194,60 @@ export function computeLayout(data: DoomData): LayoutResult {
   }
 
   return result;
+}
+
+function normalizeDoomData(data: DoomData): DoomData {
+  const byId = new Map<string, DoomData[number]>();
+  const normalized: DoomData = [];
+
+  for (let i = 0; i < data.length; i++) {
+    const node = data[i];
+    const normalizedNode: DoomData[number] = {
+      ...node,
+      children: node.children ? [...node.children] : [],
+      parents: node.parents ? [...node.parents] : [],
+    };
+
+    normalized.push(normalizedNode);
+    byId.set(normalizedNode.id, normalizedNode);
+  }
+
+  for (let i = 0; i < normalized.length; i++) {
+    const element = normalized[i];
+
+    if (element.children && element.children.length > 0) {
+      for (let j = 0; j < element.children.length; j++) {
+        const childId = element.children[j];
+        const childNode = byId.get(childId);
+        if (!childNode) {
+          continue;
+        }
+        if (!childNode.parents) {
+          childNode.parents = [];
+        }
+        if (!childNode.parents.includes(element.id)) {
+          childNode.parents.push(element.id);
+        }
+      }
+    }
+
+    if (element.parents && element.parents.length > 0) {
+      for (let j = 0; j < element.parents.length; j++) {
+        const parentId = element.parents[j];
+        const parentNode = byId.get(parentId);
+        if (!parentNode) {
+          continue;
+        }
+        if (!parentNode.children) {
+          parentNode.children = [];
+        }
+        if (!parentNode.children.includes(element.id)) {
+          parentNode.children.push(element.id);
+        }
+      }
+    }
+  }
+
+  return normalized;
 }
 

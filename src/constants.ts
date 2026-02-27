@@ -9,6 +9,7 @@ export const geneticLines = {
   official: "official",
   heretic: "heretic",
   hexen: "hexen",
+  sourceport: "sourceport",
   console: "console",
   boom: "boom",
   zdoom: "zdoom",

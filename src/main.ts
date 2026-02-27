@@ -3,6 +3,7 @@ import { Camera } from "./camera";
 import { drawScene } from "./renderer";
 import { setupInputHandlers } from "./input";
 import type { DoomData } from "./types";
+import { simpleCrossLaneSample } from "./devSamples";
 
 async function init(): Promise<void> {
   const canvas = document.getElementById("doomCanvas") as HTMLCanvasElement | null;
@@ -17,8 +18,15 @@ async function init(): Promise<void> {
 
   const camera = new Camera();
 
-  const response = await fetch("data.json");
-  const data = (await response.json()) as DoomData;
+  const useDevSample = false;
+
+  let data: DoomData;
+  if (useDevSample) {
+    data = simpleCrossLaneSample;
+  } else {
+    const response = await fetch("data.json");
+    data = (await response.json()) as DoomData;
+  }
 
   const render = computeLayout(data);
 
