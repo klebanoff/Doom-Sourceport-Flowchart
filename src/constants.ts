@@ -25,4 +25,6 @@ export const NODE_WIDTH = 200;
 export const NODE_HEIGHT = 100;
 export const PADDING_BETWEEN_NODES_X = 50;
 export const PADDING_BETWEEN_NODES_Y = 100;
+export const VIEWPORT_PADDING = 0;
+export const MIN_YEAR_LABEL_FONT_SIZE = 14;
 

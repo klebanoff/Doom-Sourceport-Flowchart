@@ -157,7 +157,9 @@
         "releaseDate": "1995-11-16",
         "type": "official",
         "geneticLine": "console",
-        "children": []
+        "parents": [
+            "jaguardoom"
+        ]
     },
     {
         "id": "finaldoomanthology",
@@ -1145,6 +1147,261 @@
         "geneticLine": "heretic",
         "parents": [
             "heretic"
+        ]
+    },
+    {
+        "id": "linuxheretic",
+        "name": "Linux Heretic",
+        "releaseDate": "1999-01-18",
+        "type": "sourceport",
+        "geneticLine": "heretic",
+        "parents": [
+            "heretic"
+        ]
+    },
+    {
+        "id": "wheretic",
+        "name": "wHeretic",
+        "releaseDate": "1999-01-16",
+        "type": "sourceport",
+        "geneticLine": "heretic",
+        "parents": [
+            "heretic"
+        ]
+    },
+    {
+        "id": "winheretic",
+        "name": "WinHeretic",
+        "releaseDate": "1999-01-15",
+        "type": "sourceport",
+        "geneticLine": "heretic",
+        "parents": [
+            "heretic"
+        ]
+    },
+    {
+        "id": "phoenixdoom",
+        "name": "Phoenix Doom",
+        "releaseDate": "2019-09-23",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "doomfor3do"
+        ]
+    },
+    {
+        "id": "optidoom",
+        "name": "OptiDoom",
+        "releaseDate": "2018-12-10",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "doomfor3do"
+        ]
+    },
+    {
+        "id": "calico",
+        "name": "Calico",
+        "releaseDate": "2017-04-30",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "jaguardoom"
+        ]
+    },
+    {
+        "id": "doom32xressurection",
+        "name": "Doom 32X: Resurrection",
+        "releaseDate": "2021-10-17",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "jaguardoom",
+            "calico"
+        ]
+    },
+    {
+        "id": "doomcd32xfusion",
+        "name": "Doom CD32X Fusion",
+        "releaseDate": "2024-10-17",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "doom32xressurection"
+        ]
+    },
+    {
+        "id": "killingtime",
+        "name": "Killing Time (3DO)",
+        "releaseDate": "1995-11-10",
+        "type": "official",
+        "geneticLine": "console",
+        "parents": [
+            "jaguardoom"
+        ]
+    },
+    {
+        "id": "killingtimepc",
+        "name": "Killing Time (PC)",
+        "releaseDate": "1996-12-09",
+        "type": "official",
+        "geneticLine": "official",
+        "parents": [
+            "killingtime"
+        ]
+    },
+    {
+        "id": "killingtimeressurection",
+        "name": "Killing Time: Resurrection",
+        "releaseDate": "2024-10-18",
+        "type": "official",
+        "geneticLine": "official",
+        "parents": [
+            "killingtime",
+            "killingtimepc",
+            "kexengine"
+        ]
+    },
+    {
+        "id": "doom95",
+        "name": "Doom95",
+        "releaseDate": "1996-08-20",
+        "type": "official",
+        "geneticLine": "official",
+        "parents": [
+            "windoom"
+        ]
+    },
+    {
+        "id": "solaris",
+        "name": "Solaris",
+        "releaseDate": "1994-11-11",
+        "type": "official",
+        "geneticLine": "official",
+        "parents": [
+            "doomv1.8"
+        ]
+    },
+    {
+        "id": "chexquest",
+        "name": "Chex Quest",
+        "releaseDate": "1996-10-31",
+        "type": "official",
+        "geneticLine": "official",
+        "parents": [
+            "finaldoomanthology"
+        ]
+    },
+    {
+        "id": "64doom",
+        "name": "64Doom",
+        "releaseDate": "2014-10-13",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "adoom",
+        "name": "ADoom",
+        "releaseDate": "1997-12-28",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "amidoom",
+        "name": "AmiDoom",
+        "releaseDate": "1997-12-24",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "amigadoom",
+        "name": "AmigaDoom",
+        "releaseDate": "1997-12-26",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "zha68k",
+        "name": "ZhaDoom68K",
+        "releaseDate": "1998-01-28",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "amigadoom"
+        ]
+    },
+    {
+        "id": "zhappc",
+        "name": "ZhaDoomPPC",
+        "releaseDate": "1998-01-28",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "amigadoom"
+        ]
+    },
+    {
+        "id": "adoomppc",
+        "name": "ADoomPPC",
+        "releaseDate": "1998-03-31",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "adoom"
+        ]
+    },
+    {
+        "id": "badmood",
+        "name": "Bad Mood",
+        "releaseDate": "1995-11-01",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "cdoom",
+        "name": "CDoom",
+        "releaseDate": "1995-11-01",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "cdoomv2",
+        "name": "CDoom v2",
+        "releaseDate": "1995-11-01",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "cdoom",
+            "mbf"
+        ]
+    },
+    {
+        "id": "doomfornuon",
+        "name": "Doom for NUON",
+        "releaseDate": "1997-12-01",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "cdoom",
+            "mbf"
         ]
     }
 

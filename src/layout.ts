@@ -45,7 +45,7 @@ export function computeLayout(data: DoomData): LayoutResult {
   const minDateValue = Math.min.apply(null, dateValues);
   const maxDateValue = Math.max.apply(null, dateValues);
   const minYear = new Date(minDateValue).getFullYear();
-  const maxYear = new Date(maxDateValue).getFullYear();
+  const maxYear = new Date(maxDateValue).getFullYear() + 1;
   const timeRange = maxDateValue - minDateValue || 1;
 
   const horizontalStep =
