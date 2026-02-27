@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "start": "bun --hot index.ts",
+    "build": "bun build ./src/main.ts --outdir=dist --minify && bun scripts/copyStatic.ts",
     "typecheck": "bun x tsc --noEmit",
     "validate:data": "bun scripts/validateData.ts"
   },
