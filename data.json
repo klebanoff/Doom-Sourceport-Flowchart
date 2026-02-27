@@ -917,7 +917,7 @@
         "geneticLine": "strife",
         "parents": [
             "strife",
-            "prboom"
+            "prboomv2.1"
         ]
     },
     {
@@ -1485,6 +1485,299 @@
         "parents": [
             "boom"
         ]
+    },
+    {
+        "id": "lsdldoom",
+        "name": "LsdlDoom",
+        "releaseDate": "1998-09-23",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "lxdoom"
+        ]
+    },
+    {
+        "id": "lsdldoomps2",
+        "name": "LsdlDoom-PS2",
+        "releaseDate": "2008-02-13",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "lxdoom"
+        ]
+    },
+    {
+        "id": "powerdoom",
+        "name": "PowerDoom",
+        "releaseDate": "2000-07-17",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "lxdoom"
+        ]
+    },
+    {
+        "id": "mbf",
+        "name": "MBF",
+        "releaseDate": "1998-09-23",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "boom"
+        ]
+    },
+    {
+        "id": "fusion",
+        "name": "Fusion",
+        "releaseDate": "2002-09-23",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "mbf"
+        ]
+    },
+    {
+        "id": "coldfusion",
+        "name": "ColdFusion",
+        "releaseDate": "2023-09-27",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "fusion"
+        ]
+    },
+    {
+        "id": "jdp",
+        "name": "JDP",
+        "releaseDate": "2001-09-29",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "mbf"
+        ]
+    },
+    {
+        "id": "smmu",
+        "name": "SMMU",
+        "releaseDate": "1999-03-20",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "mbf"
+        ]
+    },
+    {
+        "id": "eternityengine",
+        "name": "Eternity Engine",
+        "releaseDate": "2001-01-08",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "smmu"
+        ]
+    },
+    {
+        "id": "tatar",
+        "name": "Tartar",
+        "releaseDate": "2021-12-24",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "eternityengine"
+        ]
+    },
+    {
+        "id": "winmbf",
+        "name": "WinMBF",
+        "releaseDate": "2004-08-10",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "mbf"
+        ]
+    },
+    {
+        "id": "pooch",
+        "name": "Pooch",
+        "releaseDate": "2021-07-26",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "winmbf"
+        ]
+    },
+    {
+        "id": "woof",
+        "name": "Woof!",
+        "releaseDate": "2020-02-21",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "winmbf"
+        ]
+    },
+    {
+        "id": "nuggetdoom",
+        "name": "Nugget Doom",
+        "releaseDate": "2021-09-07",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "woof"
+        ]
+    },
+    {
+        "id": "cherrydoom",
+        "name": "Cherry Doom",
+        "releaseDate": "2023-09-01",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "nuggetdoom"
+        ]
+    },
+    {
+        "id": "prboom",
+        "name": "PrBoom",
+        "releaseDate": "1998-11-15",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "prboom"
+        ]
+    },
+    {
+        "id": "prboomv2.1",
+        "name": "PrBoom v2.1.0",
+        "releaseDate": "2000-09-01",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "prboom",
+            "lxdoom",
+            "lsdldoom"
+        ]
+    },
+    {
+        "id": "doomclassicios",
+        "name": "Doom Classic (iOS)",
+        "releaseDate": "2009-10-31",
+        "type": "console",
+        "geneticLine": "console",
+        "parents": [
+            "prboomv2.1"
+        ]
+    },
+    {
+        "id": "dsdoom",
+        "name": "DS Doom",
+        "releaseDate": "2006-08-08",
+        "type": "sourceport",
+        "geneticLine": "console",
+        "parents": [
+            "prboomv2.1"
+        ]
+    },
+    {
+        "id": "prboomplus",
+        "name": "PrBoom+",
+        "releaseDate": "2005-03-09",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "prboomv2.1"
+        ]
+    },
+    {
+        "id": "dsda",
+        "name": "DSDA-Doom",
+        "releaseDate": "2020-11-11",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "prboomplus"
+        ]
+    },
+    {
+        "id": "fromdoomwithlove",
+        "name": "From DOOM With Love",
+        "releaseDate": "2021-07-11",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "dsda"
+        ]
+    },
+    {
+        "id": "nyandoom",
+        "name": "Nyan Doom",
+        "releaseDate": "2024-06-16",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "dsda"
+        ]
+    },
+    {
+        "id": "prboomx",
+        "name": "PrBoomX",
+        "releaseDate": "2023-06-11",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "prboomplus"
+        ]
+    },
+    {
+        "id": "prjdoom",
+        "name": "PrjDoom",
+        "releaseDate": "1998-12-29",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "steveboom",
+            "boom"
+        ]
+    },
+    {
+        "id": "steveboom",
+        "name": "Steve Boom",
+        "releaseDate": "1998-08-14",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "doomworld",
+            "boom"
+        ]
+    },
+    {
+        "id": "doomworld",
+        "name": "DoomWorld!",
+        "releaseDate": "1998-05-21",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "dosdoom"
+        ]
+    },
+    {
+        "id": "rordoom",
+        "name": "RORDoom",
+        "releaseDate": "2000-02-12",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "boom"
+        ]
+    },
+    {
+        "id": "reboom",
+        "name": "ReBoom",
+        "releaseDate": "2021-08-22",
+        "type": "sourceport",
+        "geneticLine": "boom",
+        "parents": [
+            "boom"
+        ]
     }
-
 ]
