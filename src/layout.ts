@@ -144,12 +144,13 @@ export function computeLayout(data: DoomData): LayoutResult {
       result.lanes[result.lanes.length - 1];
     const rowIndex = typeof node._rowIndex === "number" ? node._rowIndex : 0;
 
-    const firstRowCenter =
-      lane.top + paddingBetweenNodesY + baseRowHeight / 2;
-    const yCenter =
-      firstRowCenter + rowIndex * baseRowHeight;
-
-    node.Y = yCenter;
+    const offset =
+      rowIndex === 0
+        ? 0
+        : rowIndex % 2 === 1
+          ? -Math.ceil(rowIndex / 2)
+          : Math.floor(rowIndex / 2);
+    node.Y = lane.yCenter + offset * baseRowHeight;
   });
 
   for (let i = 0; i < augmented.length; i++) {

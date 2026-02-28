@@ -6,7 +6,7 @@ import {
 import type { LayoutLink, LayoutNode } from "./types";
 import { sampleSCurve } from "./geometry";
 
-const SAMPLES_PER_LINK = 1;
+const SAMPLES_PER_LINK = 3;
 const HORIZONTAL_SKIP_THRESHOLD_MULTIPLIER = 2;
 const VERTICAL_CLEARANCE_FACTOR = 0.7;
 const ADDITIONAL_VERTICAL_CLEARANCE = NODE_HEIGHT;

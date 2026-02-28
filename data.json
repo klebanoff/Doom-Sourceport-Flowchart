@@ -28,7 +28,7 @@
         "children": [
             "heretic",
             "doomv1.3",
-            "windoom",
+            "windoommicrosoft",
             "jaguardoom"
         ]
     },
@@ -227,7 +227,7 @@
         "geneticLine": "heretic"
     },
     {
-        "id": "windoom",
+        "id": "windoommicrosoft",
         "name": "WinDoom (Microsoft)",
         "releaseDate": "1994-06-08",
         "type": "official",
@@ -274,7 +274,7 @@
         "type": "official",
         "geneticLine": "official",
         "parents": [
-            "windoom"
+            "windoommicrosoft"
         ]
     },
     {
@@ -1269,7 +1269,7 @@
         "type": "official",
         "geneticLine": "official",
         "parents": [
-            "windoom"
+            "windoommicrosoft"
         ]
     },
     {
@@ -1778,6 +1778,277 @@
         "geneticLine": "boom",
         "parents": [
             "boom"
+        ]
+    },
+    {
+        "id": "doomdc",
+        "name": "DoomDC",
+        "releaseDate": "2002-03-09",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "nxdoom",
+        "name": "nxDoom",
+        "releaseDate": "2002-08-08",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "doomdc"
+        ]
+    },
+    {
+        "id": "ggidoom",
+        "name": "ggiDoom",
+        "releaseDate": "1997-12-24",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "ntdoom",
+        "name": "NTDOOM",
+        "releaseDate": "1998-01-07",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "ntdoom",
+        "name": "WDMP",
+        "releaseDate": "1998-07-30",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "ntdoom"
+        ]
+    },
+    {
+        "id": "pmdoom",
+        "name": "PmDoom",
+        "releaseDate": "1998-03-11",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "gpdoom",
+        "name": "gpDoom",
+        "releaseDate": "2006-05-17",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "pmdoom"
+        ]
+    },
+    {
+        "id": "sdldoom",
+        "name": "SDL Doom",
+        "releaseDate": "1998-07-04",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "cdoommobile",
+        "name": "CDoom (mobile)",
+        "releaseDate": "2001-09-11",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "sdldoom"
+        ]
+    },
+    {
+        "id": "c2doom",
+        "name": "C2Doom",
+        "releaseDate": "2008-10-29",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "cdoommobile"
+        ]
+    },
+    {
+        "id": "doompsp",
+        "name": "Doom PSP",
+        "releaseDate": "2006-01-26",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "sdldoom"
+        ]
+    },
+    {
+        "id": "jlimedoom",
+        "name": "JLiME-Doom",
+        "releaseDate": "2008-10-19",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "sdldoom"
+        ]
+    },
+    {
+        "id": "windoom",
+        "name": "WinDoom",
+        "releaseDate": "1998-01-14",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "doomx",
+        "name": "DoomX",
+        "releaseDate": "2003-05-22",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "windoom"
+        ]
+    },
+    {
+        "id": "gldoom",
+        "name": "glDoom",
+        "releaseDate": "1998-10-05",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "windoom"
+        ]
+    },
+    {
+        "id": "iasdoom",
+        "name": "IAS Doom",
+        "releaseDate": "1999-06-18",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "windoom"
+        ]
+    },
+    {
+        "id": "doom4ce",
+        "name": "Doom4CE",
+        "releaseDate": "1999-10-25",
+        "type": "sourceport",
+        "geneticLine": "sourceport",
+        "parents": [
+            "windoom"
+        ]
+    },
+    {
+        "id": "bzdoom",
+        "name": "bZDoom",
+        "releaseDate": "2008-05-29",
+        "type": "sourceport",
+        "geneticLine": "zdoom",
+        "parents": [
+            "zdoom"
+        ]
+    },
+    {
+        "id": "csdoom",
+        "name": "csDoom",
+        "releaseDate": "2000-05-27",
+        "type": "sourceport",
+        "geneticLine": "zdoom",
+        "parents": [
+            "zdoom"
+        ]
+    },
+    {
+        "id": "odamex",
+        "name": "Odamex",
+        "releaseDate": "2007-01-19",
+        "type": "sourceport",
+        "geneticLine": "zdoom",
+        "parents": [
+            "csdoom"
+        ]
+    },
+    {
+        "id": "zdaemon",
+        "name": "ZDaemon",
+        "releaseDate": "2001-02-20",
+        "type": "sourceport",
+        "geneticLine": "zdoom",
+        "parents": [
+            "csdoom"
+        ]
+    },
+    {
+        "id": "x-doom",
+        "name": "X-Doom",
+        "releaseDate": "2004-10-29",
+        "type": "sourceport",
+        "geneticLine": "zdoom",
+        "parents": [
+            "zdaemon"
+        ]
+    },
+    {
+        "id": "gzdoom",
+        "name": "GZDoom",
+        "releaseDate": "2005-08-30",
+        "type": "sourceport",
+        "geneticLine": "zdoom",
+        "parents": [
+            "zdoom"
+        ]
+    },
+    {
+        "id": "gz3doom",
+        "name": "GZ3Doom",
+        "releaseDate": "2015-03-14",
+        "type": "sourceport",
+        "geneticLine": "zdoom",
+        "parents": [
+            "gzdoom"
+        ]
+    },
+    {
+        "id": "gzdoomforosx",
+        "name": "GZDoom for OS X",
+        "releaseDate": "2011-12-25",
+        "type": "sourceport",
+        "geneticLine": "zdoom",
+        "parents": [
+            "gzdoom"
+        ]
+    },
+    {
+        "id": "gzdoomvintage",
+        "name": "GZDoom Vintage",
+        "releaseDate": "2018-07-30",
+        "type": "sourceport",
+        "geneticLine": "zdoom",
+        "parents": [
+            "gzdoom"
+        ]
+    },
+    {
+        "id": "lzdoom",
+        "name": "LZDoom",
+        "releaseDate": "2018-09-30",
+        "type": "sourceport",
+        "geneticLine": "zdoom",
+        "parents": [
+            "gzdoom",
+            "gzdoomvintage"
         ]
     }
 ]
