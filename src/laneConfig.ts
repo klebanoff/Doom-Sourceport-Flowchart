@@ -6,7 +6,6 @@ export const LANE_ORDER: string[] = [
   geneticLines.strife,
   geneticLines.doomsday,
   geneticLines.vavoom,
-  geneticLines.eternity,
   geneticLines.chocolate,
   geneticLines.zdoom,
   geneticLines.boom,

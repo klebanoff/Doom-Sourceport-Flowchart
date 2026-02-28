@@ -163,7 +163,6 @@ function drawLegend(context: RenderContext): void {
     geneticLines.boom,
     geneticLines.zdoom,
     geneticLines.chocolate,
-    geneticLines.eternity,
     geneticLines.doomsday,
     geneticLines.vavoom,
     "other",

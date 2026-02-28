@@ -16,7 +16,6 @@ export const geneticLines = {
   zdoom: "zdoom",
   chocolate: "chocolate",
   eternity: "eternity",
-  dosdoom: "dosdoom",
   doomsday: "doomsday",
   vavoom: "vavoom",
 } as const;

@@ -217,7 +217,7 @@
         "name": "id Tech 4",
         "releaseDate": "2004-08-12",
         "type": "unrelated",
-        "geneticLine": "official"
+        "geneticLine": "other"
     },
     {
         "id": "heretic",
@@ -908,14 +908,14 @@
         "name": "Unity",
         "releaseDate": "2005-06-08",
         "type": "unrelated",
-        "geneticLine": "official"
+        "geneticLine": "other"
     },
     {
         "id": "kexengine",
         "name": "KEX Engine",
         "releaseDate": "2020-01-01",
         "type": "unrelated",
-        "geneticLine": "official",
+        "geneticLine": "other",
         "parents": [
             "kex2"
         ]
@@ -925,7 +925,7 @@
         "name": "KEX 2",
         "releaseDate": "2010-01-01",
         "type": "unrelated",
-        "geneticLine": "official",
+        "geneticLine": "other",
         "parents": [
             "doom64ex"
         ]
@@ -1072,6 +1072,7 @@
         "name": "DOSDoom",
         "releaseDate": "1997-12-23",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "linuxdoom1997"
