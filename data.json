@@ -1643,7 +1643,7 @@
         "type": "sourceport",
         "geneticLine": "boom",
         "parents": [
-            "prboom"
+            "boom"
         ]
     },
     {
@@ -1755,7 +1755,7 @@
         "name": "DoomWorld!",
         "releaseDate": "1998-05-21",
         "type": "sourceport",
-        "geneticLine": "boom",
+        "geneticLine": "sourceport",
         "parents": [
             "dosdoom"
         ]
