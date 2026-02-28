@@ -7,7 +7,12 @@ import {
   MIN_YEAR_LABEL_FONT_SIZE,
 } from "./constants";
 import { getLaneDisplayName, getLaneColors } from "./laneConfig";
-import type { CameraLike, LayoutResult, LayoutNode } from "./types";
+import type {
+  CameraLike,
+  LayoutResult,
+  LayoutNode,
+  DevelopmentStatus,
+} from "./types";
 import { getSCurveControlPoints } from "./geometry";
 
 function darkenColor(hex: string, factor: number): string {
@@ -159,7 +164,6 @@ function drawLegend(context: RenderContext): void {
     geneticLines.zdoom,
     geneticLines.chocolate,
     geneticLines.eternity,
-    geneticLines.dosdoom,
     geneticLines.doomsday,
     geneticLines.vavoom,
     "other",
@@ -176,6 +180,9 @@ function drawLegend(context: RenderContext): void {
   ctx.textBaseline = "middle";
   ctx.textAlign = "left";
 
+  ctx.fillStyle = darkenColor("#000000", 0.7);
+  ctx.fillText("Genetic line", legendX, legendY - 14);
+
   for (let i = 0; i < legendEntries.length; i++) {
     const key = legendEntries[i];
     const colors = getLaneColors(key);
@@ -191,6 +198,31 @@ function drawLegend(context: RenderContext): void {
 
     ctx.fillStyle = darkenColor(colors.stroke, 0.7);
     const label = getLaneDisplayName(key);
+    ctx.fillText(label, legendX + boxSize + paddingX, y);
+  }
+
+  const devStatusLegendTop = legendY + legendEntries.length * lineHeight + 12;
+  const devStatusEntries: { status: DevelopmentStatus; label: string }[] = [
+    { status: "discontinued", label: "Discontinued" },
+    { status: "active", label: "Active" },
+    { status: "inactive", label: "Inactive" },
+    { status: "merged", label: "Merged" },
+  ];
+  ctx.fillStyle = darkenColor("#000000", 0.7);
+  ctx.fillText("Development status", legendX, devStatusLegendTop - 12);
+  for (let i = 0; i < devStatusEntries.length; i++) {
+    const { status, label } = devStatusEntries[i];
+    const y = devStatusLegendTop + 4 + i * lineHeight;
+    const boxY = y - boxSize / 2;
+    drawDevelopmentStatusIconInBox(
+      ctx,
+      status,
+      legendX,
+      boxY,
+      boxSize,
+      1
+    );
+    ctx.fillStyle = darkenColor("#000000", 0.7);
     ctx.fillText(label, legendX + boxSize + paddingX, y);
   }
 
@@ -606,6 +638,72 @@ function renderSingleLink(
   ctx.restore();
 }
 
+function drawDevelopmentStatusIconInBox(
+  ctx: CanvasRenderingContext2D,
+  status: DevelopmentStatus,
+  left: number,
+  top: number,
+  size: number,
+  lineScale: number
+): void {
+  if (size < 4) {
+    return;
+  }
+  const cx = left + size / 2;
+  const cy = top + size / 2;
+  const r = Math.max(0.5, size / 2 - 1);
+  const inset = Math.max(1, Math.min(2, size / 4));
+
+  ctx.save();
+
+  switch (status) {
+    case "discontinued": {
+      ctx.strokeStyle = "#c62828";
+      ctx.lineWidth = Math.max(1, 2 * lineScale);
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.moveTo(left, top);
+      ctx.lineTo(left + size, top + size);
+      ctx.moveTo(left + size, top);
+      ctx.lineTo(left, top + size);
+      ctx.stroke();
+      break;
+    }
+    case "active": {
+      ctx.fillStyle = "#2e7d32";
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.fill();
+      break;
+    }
+    case "inactive": {
+      ctx.strokeStyle = "#757575";
+      ctx.lineWidth = Math.max(1, 1.5 * lineScale);
+      ctx.beginPath();
+      ctx.arc(cx, cy, Math.max(0.5, r - 1), 0, Math.PI * 2);
+      ctx.stroke();
+      break;
+    }
+    case "merged": {
+      ctx.strokeStyle = "#455a64";
+      ctx.lineWidth = Math.max(1, 1.5 * lineScale);
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.beginPath();
+      ctx.moveTo(cx, top + inset);
+      ctx.lineTo(cx, cy + inset);
+      ctx.moveTo(left + inset, top + size - inset);
+      ctx.lineTo(cx, cy + inset);
+      ctx.moveTo(left + size - inset, top + size - inset);
+      ctx.lineTo(cx, cy + inset);
+      ctx.stroke();
+      break;
+    }
+  }
+
+  ctx.restore();
+}
+
 function renderNodes(context: RenderContext): void {
   const { render } = context;
 
@@ -689,6 +787,24 @@ function renderSingleNode(context: RenderContext, node: LayoutNode): void {
   ctx.fill();
   ctx.stroke();
   ctx.restore();
+
+  if (node.developmentStatus) {
+    const iconPadding = 5 * scale;
+    const iconSize = 14 * scale;
+    const iconLeft = x + width - iconPadding - iconSize;
+    const iconTop = y + iconPadding;
+    ctx.save();
+    ctx.globalAlpha = isDimmed ? 0.3 : 1;
+    drawDevelopmentStatusIconInBox(
+      ctx,
+      node.developmentStatus,
+      iconLeft,
+      iconTop,
+      iconSize,
+      scale
+    );
+    ctx.restore();
+  }
 
   ctx.save();
   ctx.textBaseline = "middle";

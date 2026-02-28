@@ -1,5 +1,11 @@
 export type DoomNodeType = "mainline" | "official" | "unrelated" | "console";
 
+export type DevelopmentStatus =
+  | "discontinued"
+  | "active"
+  | "inactive"
+  | "merged";
+
 export type GeneticLine =
   | "official"
   | "heretic"
@@ -21,6 +27,7 @@ export interface DoomNode {
   type: DoomNodeType;
   releaseDate: string;
   geneticLine: GeneticLine;
+  developmentStatus?: DevelopmentStatus;
   children?: string[];
   parents?: string[];
 }

@@ -380,10 +380,67 @@
         ]
     },
     {
-        "id": "berenewfie",
-        "name": "Berenewfie",
+       "id" : "frosteddoom",
+        "name": "FROSTED DOOM",
+        "releaseDate": "2016-05-03",
+        "type": "sourceport",
+        "developmentStatus": "inactive",
+        "geneticLine": "chocolate",
+        "parents": [
+            "chocolatedoom"
+        ] 
+    },
+    {
+       "id" : "fbdoom",
+        "name": "fbDOOM",
+        "releaseDate": "2016-12-02",
+        "type": "sourceport",
+        "developmentStatus": "inactive",
+        "geneticLine": "chocolate",
+        "parents": [
+            "frosteddoom"
+        ] 
+    },
+    {
+       "id" : "doomgeneric",
+        "name": "doomgeneric",
+        "releaseDate": "2019-08-04",
+        "type": "sourceport",
+        "developmentStatus": "inactive",
+        "geneticLine": "chocolate",
+        "parents": [
+            "fbdoom"
+        ] 
+    },
+    {
+       "id" : "doomwithin",
+        "name": "Doom Within",
+        "releaseDate": "2024-08-25",
+        "type": "sourceport",
+        "developmentStatus": "inactive",
+        "geneticLine": "chocolate",
+        "parents": [
+            "doomgeneric"
+        ] 
+    },
+    {
+       "id" : "baredoom",
+        "name": "bareDOOM",
+        "releaseDate": "2021-04-01",
+        "type": "sourceport",
+        "developmentStatus": "inactive",
+        "geneticLine": "chocolate",
+        "parents": [
+            "linuxdoom1997",
+            "doomgeneric"
+        ] 
+    },
+    {
+        "id": "bernewfie",
+        "name": "Bernewfie",
         "type": "sourceport",
         "releaseDate": "2023-12-10",
+        "developmentStatus": "discontinued",
         "geneticLine": "hexen",
         "parents": [
             "hexen",
@@ -395,6 +452,7 @@
         "name": "Chocolate Hexen",
         "releaseDate": "2013-12-23",
         "type": "sourceport",
+        "developmentStatus": "merged",
         "geneticLine": "chocolate",
         "parents": [
             "chocolatedoom",
@@ -403,9 +461,10 @@
     },
     {
         "id" : "delpidoom",
-        "name": "DelpiDoom",
+        "name": "DelphiDoom",
         "releaseDate": "2005-02-07",
         "type": "sourceport",
+        "developmentStatus": "inactive",
         "geneticLine": "sourceport",
         "parents": [
             "linuxdoom1997",
@@ -416,10 +475,22 @@
         ]
     },
     {
+        "id" : "fpcdoom",
+        "name": "FPCDoom",
+        "releaseDate": "2022-04-10",
+        "type": "sourceport",
+        "developmentStatus": "inactive",
+        "geneticLine": "sourceport",
+        "parents": [
+            "delpidoom"
+        ]
+    },
+    {
         "id": "doomsday",
         "name": "Doomsday",
         "releaseDate": "2002-03-10",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "doomsday",
         "parents": [
             "jhexen",
@@ -432,6 +503,7 @@
         "name": "JHexen",
         "releaseDate": "1999-11-01",
         "type": "sourceport",
+        "developmentStatus": "merged",
         "geneticLine": "doomsday",
         "parents": [
             "hexen"
@@ -442,6 +514,7 @@
         "name": "JHeretic",
         "releaseDate": "2000-03-20",
         "type": "sourceport",
+        "developmentStatus": "merged",
         "geneticLine": "doomsday",
         "parents": [
             "heretic"
@@ -452,6 +525,7 @@
         "name": "JDoom",
         "releaseDate": "2000-05-31",
         "type": "sourceport",
+        "developmentStatus": "merged",
         "geneticLine": "doomsday",
         "parents": [
             "linuxdoom1997"
@@ -462,6 +536,7 @@
         "name": "Risen3D",
         "releaseDate": "2003-10-14",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "doomsday",
         "parents": [
             "doomsday",
@@ -473,6 +548,7 @@
         "name": "DXHexen",
         "releaseDate": "1999-07-06",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "hexen",
         "parents": [
             "hexen"
@@ -483,6 +559,7 @@
         "name": "Hexen (OS/2)",
         "releaseDate": "1999-07-11",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "hexen",
         "parents": [
             "hexen"
@@ -493,6 +570,7 @@
         "name": "HexenDos",
         "releaseDate": "1999-09-01",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "hexen",
         "parents": [
             "hexen"
@@ -502,6 +580,7 @@
         "id": "hexen32",
         "name": "Hexen32",
         "releaseDate": "1999-10-23",
+        "developmentStatus": "discontinued",
         "type": "sourceport",
         "geneticLine": "hexen",
         "parents": [
@@ -512,6 +591,7 @@
         "id": "hexetic",
         "name": "HeXetic",
         "releaseDate": "1999-02-02",
+        "developmentStatus": "discontinued",
         "type": "sourceport",
         "geneticLine": "heretic",
         "parents": [
@@ -524,6 +604,7 @@
         "name": "Linux Hexen",
         "releaseDate": "1999-10-29",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "hexen",
         "parents": [
             "hexen"
@@ -534,6 +615,7 @@
         "name": "HHexen",
         "releaseDate": "2000-03-21",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "hexen",
         "parents": [
             "linuxhexen"
@@ -544,6 +626,7 @@
         "name": "SDL Hexen",
         "releaseDate": "1999-12-10",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "hexen",
         "parents": [
             "linuxhexen"
@@ -554,6 +637,7 @@
         "name": "U-Hexen",
         "releaseDate": "2000-12-01",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "hexen",
         "parents": [
             "hexen"
@@ -564,6 +648,7 @@
         "name": "Vavoom",
         "releaseDate": "2000-06-13",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "vavoom",
         "parents": [
             "linuxdoom1997",
@@ -578,6 +663,7 @@
         "name": "K8Vavoom",
         "releaseDate": "2018-10-13",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "vavoom",
         "parents": [
             "vavoom",
@@ -589,6 +675,7 @@
         "name": "WinHexen",
         "releaseDate": "1999-05-24",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "hexen",
         "parents": [
             "hexen"
@@ -598,6 +685,7 @@
         "id": "glhexen",
         "name": "GLHexen",
         "releaseDate": "1999-06-26",
+        "developmentStatus": "discontinued",
         "type": "sourceport",
         "geneticLine": "hexen",
         "parents": [
@@ -609,6 +697,7 @@
         "name": "ZDoom",
         "releaseDate": "1999-06-26",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "zdoom",
         "parents": [
             "linuxdoom1997",
@@ -623,6 +712,7 @@
         "id" : "chocolateheretic",
         "name": "Chocolate Heretic",
         "releaseDate": "2013-12-23",
+        "developmentStatus": "merged",
         "type": "sourceport",
         "geneticLine": "chocolate",
         "parents": [
@@ -634,6 +724,7 @@
         "id": "chocolatedoom",
         "name": "Chocolate Doom",
         "releaseDate": "2005-09-07",
+        "developmentStatus": "active",
         "type": "sourceport",
         "geneticLine": "chocolate",
         "parents": [
@@ -642,8 +733,9 @@
     },
     {
         "id": "chocorenderlimits",
-        "name": "Chocolaterenderlimits",
+        "name": "Chocorenderlimits",
         "releaseDate": "2011-02-26",
+        "developmentStatus": "inactive",
         "type": "sourceport",
         "geneticLine": "chocolate",
         "parents": [
@@ -655,6 +747,7 @@
         "name": "CRL",
         "releaseDate": "2023-03-31",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "chocolate",
         "parents": [
             "chocorenderlimits"
@@ -665,6 +758,7 @@
         "name": "International Doom 7.0",
         "releaseDate": "2024-03-08",
         "type": "sourceport",
+        "developmentStatus": "merged",
         "geneticLine": "chocolate",
         "parents": [
             "internationaldoom",
@@ -676,6 +770,7 @@
         "name": "International Doom",
         "releaseDate": "2022-03-03",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "chocolate",
         "parents": [
             "russiandoom"
@@ -686,13 +781,14 @@
         "name": "Russian Doom",
         "releaseDate": "2016-09-16",
         "type": "sourceport",
+        "developmentStatus": "merged",
         "geneticLine": "chocolate",
         "parents": [
             "chocolatedoom",
             "crispydoom",
             "doomretro",
             "doomvanille",
-            "pcdoom"
+            "gamesrc-ver-recreation"
         ]
     },
     {
@@ -701,6 +797,7 @@
         "releaseDate": "2023-10-29",
         "type": "sourceport",
         "geneticLine": "chocolate",
+        "developmentStatus": "active",
         "parents": [
             "russiandoom"
         ]
@@ -710,6 +807,7 @@
         "name": "CRY",
         "releaseDate": "2019-02-10",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "chocolate",
         "parents": [
             "russiandoom",
@@ -720,6 +818,7 @@
         "id": "competitiondoom",
         "name": "Competition Doom",
         "releaseDate": "2019-08-13",
+        "developmentStatus": "active",
         "type": "sourceport",
         "geneticLine": "chocolate",
         "parents": [
@@ -730,6 +829,7 @@
         "id": "crispydoom",
         "name": "Crispy Doom",
         "releaseDate": "2014-03-10",
+        "developmentStatus": "active",
         "type": "sourceport",
         "geneticLine": "chocolate",
         "parents": [
@@ -740,6 +840,7 @@
         "id": "marshmellowdoom",
         "name": "Marshmellow Doom",
         "releaseDate": "2021-02-21",
+        "developmentStatus": "active",
         "type": "sourceport",
         "geneticLine": "chocolate",
         "parents": [
@@ -750,6 +851,7 @@
         "id": "sodoom",
         "name": "So Doom",
         "releaseDate": "2019-10-11",
+        "developmentStatus": "active",
         "type": "sourceport",
         "geneticLine": "chocolate",
         "parents": [
@@ -760,6 +862,7 @@
         "id": "doomretro",
         "name": "Doom Retro",
         "releaseDate": "2013-12-10",
+        "developmentStatus": "active",
         "type": "sourceport",
         "geneticLine": "chocolate",
         "parents": [
@@ -771,6 +874,7 @@
         "name": "Rum and Raisin Doom",
         "releaseDate": "2022-05-26",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "chocolate",
         "parents": [
             "chocolatedoom"
@@ -831,6 +935,7 @@
         "name": "Doom64 EX",
         "releaseDate": "2008-07-10",
         "type": "sourceport",
+        "developmentStatus": "inactive",
         "geneticLine": "sourceport",
         "parents": [
             "doom64",
@@ -842,6 +947,7 @@
         "name": "Doom 3D",
         "releaseDate": "2001-02-22",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "linuxdoom1997"
@@ -850,6 +956,7 @@
     {
         "id": "doom64explus",
         "name": "Doom64 EX Plus",
+        "developmentStatus": "inactive",
         "releaseDate": "2022-09-20",
         "type": "sourceport",
         "geneticLine": "sourceport",
@@ -862,6 +969,7 @@
         "name": "Doom64 Super EX Plus",
         "releaseDate": "2023-01-30",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "sourceport",
         "parents": [
                 "doom64explus"
@@ -883,6 +991,7 @@
         "name": "Chocolate Strife",
         "releaseDate": "2011-01-01",
         "type": "sourceport",
+        "developmentStatus": "merged",
         "geneticLine": "chocolate",
         "parents": [
             "chocolatedoom",
@@ -894,6 +1003,7 @@
         "name": "Strawberry Doom",
         "releaseDate": "2008-01-01",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "chocolate",
         "parents": [
             "chocolatedoom"
@@ -914,6 +1024,7 @@
         "name": "SvStrife",
         "releaseDate": "2005-09-12",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "strife",
         "parents": [
             "strife",
@@ -925,6 +1036,7 @@
         "name": "SvStrife",
         "releaseDate": "2006-02-01",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "strife",
         "parents": [
             "svstrife",
@@ -948,6 +1060,7 @@
         "name": "Doom Legacy",
         "releaseDate": "1998-02-12",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "sourceport",
         "parents": [
             "dosdoom",
@@ -1040,6 +1153,7 @@
         "name": "ZDoomGL (v1)",
         "releaseDate": "1999-10-15",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "zdoom",
         "parents": [
             "doomgl",
@@ -1985,6 +2099,7 @@
         "name": "ZDaemon",
         "releaseDate": "2001-02-20",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "zdoom",
         "parents": [
             "csdoom"
@@ -2045,10 +2160,401 @@
         "name": "LZDoom",
         "releaseDate": "2018-09-30",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "zdoom",
         "parents": [
             "gzdoom",
             "gzdoomvintage"
+        ]
+    },
+    {
+        "id": "freedoomforandroid",
+        "name": "Freedoom For Android",
+        "releaseDate": "2018-01-12",
+        "type": "sourceport",
+        "developmentStatus": "discontinued",
+        "geneticLine": "zdoom",
+        "parents": [
+            "gzdoom"
+        ]
+    },
+    {
+        "id": "qzdoom",
+        "name": "QZDoom",
+        "releaseDate": "2016-10-18",
+        "type": "sourceport",
+        "developmentStatus": "inactive",
+        "geneticLine": "zdoom",
+        "parents": [
+            "gzdoom"
+        ]
+    },
+    {
+        "id": "towertofbabel",
+        "name": "Tower of Babel (source port)",
+        "releaseDate": "2011-06-15",
+        "type": "sourceport",
+        "developmentStatus": "inactive",
+        "geneticLine": "zdoom",
+        "parents": [
+            "gzdoom"
+        ]
+    },
+    {
+        "id": "vkdoom",
+        "name": "VKDoom",
+        "releaseDate": "2023-07-15",
+        "type": "sourceport",
+        "developmentStatus": "discontinued",
+        "geneticLine": "zdoom",
+        "parents": [
+            "gzdoom"
+        ]
+    },
+    {
+        "id": "uzdoom",
+        "name": "UZDoom",
+        "releaseDate": "2025-11-08",
+        "type": "sourceport",
+        "developmentStatus": "active",
+        "geneticLine": "zdoom",
+        "parents": [
+            "gzdoom"
+        ]
+    },
+    {
+        "id": "mandoom",
+        "name": "ManDoom",
+        "releaseDate": "2011-01-01",
+        "type": "sourceport",
+        "developmentStatus": "discontinued",
+        "geneticLine": "zdoom",
+        "parents": [
+            "zdoom"
+        ]
+    },
+    {
+        "id": "rzdoom",
+        "name": "RZDoom",
+        "releaseDate": "2021-12-08",
+        "type": "sourceport",
+        "developmentStatus": "active",
+        "geneticLine": "zdoom",
+        "parents": [
+            "zdoom"
+        ]
+    },
+    {
+        "id": "doomacorn",
+        "name": "Doom (Acorn RiscOS)",
+        "releaseDate": "1998-01-01",
+        "developmentStatus": "discontinued",
+        "type": "official",
+        "geneticLine": "official",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "doomplusacorn",
+        "name": "Doom Plus (Acorn RiscOS)",
+        "releaseDate": "2000-11-01",
+        "type": "official",
+        "developmentStatus": "discontinued",
+        "geneticLine": "official",
+        "parents": [
+            "doomacorn"
+        ]
+    },
+    {
+        "id": "terminaldoom",
+        "name": "Terminal DOOM",
+        "releaseDate": "2005-03-23",
+        "type": "sourceport",
+        "developmentStatus": "discontinued",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997",
+            "idtech4"
+        ]
+    },
+    {
+        "id": "celldoom",
+        "name": "CellDoom",
+        "releaseDate": "2003-01-01",
+        "type": "sourceport",
+        "developmentStatus": "discontinued",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "doom9210",
+        "name": "Doom 9210",
+        "releaseDate": "2002-05-01",
+        "type": "sourceport",
+        "developmentStatus": "discontinued",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "edidoom",
+        "name": "Edidoom",
+        "releaseDate": "2014-12-28",
+        "type": "sourceport",
+        "developmentStatus": "discontinued",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "idoom",
+        "name": "iDoom",
+        "releaseDate": "2005-10-04",
+        "type": "sourceport",
+        "developmentStatus": "discontinued",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "zdoomz",
+        "name": "ZDoomZ",
+        "releaseDate": "2005-03-06",
+        "type": "sourceport",
+        "developmentStatus": "discontinued",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "ndoom",
+        "name": "nDoom",
+        "releaseDate": "2011-02-15",
+        "type": "sourceport",
+        "developmentStatus": "inactive",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "helion",
+        "name": "Helion",
+        "releaseDate": "2022-10-22",
+        "type": "sourceport",
+        "developmentStatus": "active",
+        "geneticLine": "sourceport",
+        "parents": [
+        ]
+    },
+    {
+        "id": "vizdoom",
+        "name": "ViZDoom",
+        "releaseDate": "2016-03-25",
+        "type": "sourceport",
+        "developmentStatus": "active",
+        "geneticLine": "zdoom",
+        "parents": [
+            "zdoom"
+        ]
+    },
+    {
+        "id": "atbdoom",
+        "name": "ATB Doom",
+        "releaseDate": "1997-12-29",
+        "type": "sourceport",
+        "developmentStatus": "discontinued",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "doomvanille",
+        "name": "Doom Vanille",
+        "releaseDate": "2017-05-29",
+        "type": "sourceport",
+        "developmentStatus": "discontinued",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997",
+            "gamesrc-ver-recreation"
+        ]
+    },
+    {
+        "id": "gamesrc-ver-recreation",
+        "name": "gamesrc-ver-recreation",
+        "releaseDate": "2014-10-01",
+        "type": "sourceport",
+        "developmentStatus": "discontinued",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id": "doom128",
+        "name": "Doom128",
+        "releaseDate": "2022-02-10",
+        "type": "sourceport",
+        "developmentStatus": "active",
+        "geneticLine": "sourceport",
+        "parents": [
+            "gamesrc-ver-recreation",
+            "doom32"
+        ]
+    },
+    {
+        "id": "doom32",
+        "name": "Doom32",
+        "releaseDate": "2012-12-12",
+        "type": "sourceport",
+        "developmentStatus": "discontinued",
+        "geneticLine": "sourceport",
+        "parents": [
+            "doom2plus"
+        ]
+    },
+    {
+        "id": "doom2plus",
+        "name": "Doom2-plus",
+        "releaseDate": "2006-03-20",
+        "type": "sourceport",
+        "developmentStatus": "discontinued",
+        "geneticLine": "sourceport",
+        "parents": [
+            "doom2exe"
+        ]
+    },
+    {
+        "id": "doom2exe",
+        "name": "DOOM2.EXE",
+        "releaseDate": "1995-02-01",
+        "type": "mainline",
+        "geneticLine": "official",
+        "parents": [
+            "doomv1.9"
+        ]
+    },
+    {
+        "id": "doomexe",
+        "name": "DOOM.EXE",
+        "releaseDate": "1995-05-25",
+        "type": "mainline",
+        "geneticLine": "official",
+        "parents": [
+            "doomv1.9"
+        ]
+    },
+    {
+        "id": "doomplus",
+        "name": "Doom-plus",
+        "releaseDate": "2007-04-01",
+        "type": "sourceport",
+        "developmentStatus": "discontinued",
+        "geneticLine": "sourceport",
+        "parents": [
+            "doomexe",
+            "doom2plus"
+        ]
+    },
+    {
+        "id": "hereticplus",
+        "name": "Heretic-plus",
+        "releaseDate": "2007-04-02",
+        "type": "sourceport",
+        "developmentStatus": "discontinued",
+        "geneticLine": "heretic",
+        "parents": [
+            "hereticexe",
+            "doom2plus"
+        ]
+    },
+    {
+        "id": "hereticexe",
+        "name": "HERETIC.EXE",
+        "releaseDate": "1996-03-22",
+        "type": "official",
+        "geneticLine": "heretic",
+        "parents": [
+            "heretic"
+        ]
+    },
+    {
+        "id": "hexenexe",
+        "name": "HEXEN.EXE",
+        "releaseDate": "1996-03-14",
+        "type": "official",
+        "geneticLine": "hexen",
+        "parents": [
+            "hexen"
+        ]
+    },
+    {
+        "id": "hexenplus",
+        "name": "Hexen-plus",
+        "releaseDate": "2010-03-17",
+        "type": "sourceport",
+        "developmentStatus": "discontinued",
+        "geneticLine": "hexen",
+        "parents": [
+            "hexenexe"
+        ]
+    },
+    {
+        "id": "strifeexe",
+        "name": "STRIFE1.EXE",
+        "releaseDate": "1997-03-19",
+        "type": "official",
+        "geneticLine": "strife",
+        "parents": [
+            "strife"
+        ]
+    },
+    {
+        "id": "strife128",
+        "name": "Strife128",
+        "releaseDate": "2022-04-29",
+        "type": "sourceport",
+        "developmentStatus": "active",
+        "geneticLine": "strife",
+        "parents": [
+            "doom128",
+            "gamesrc-ver-recreation",
+            "strifeexe"
+        ]
+    },
+    {
+        "id": "heretic128",
+        "name": "Heretic128",
+        "releaseDate": "2022-02-10",
+        "type": "sourceport",
+        "developmentStatus": "active",
+        "geneticLine": "heretic",
+        "parents": [
+            "doom128",
+            "gamesrc-ver-recreation",
+            "hereticexe"
+        ]
+    },
+    {
+        "id": "hexen128",
+        "name": "Hexen128",
+        "releaseDate": "2022-02-10",
+        "type": "sourceport",
+        "developmentStatus": "active",
+        "geneticLine": "hexen",
+        "parents": [
+            "doom128",
+            "gamesrc-ver-recreation",
+            "hexenexe"
         ]
     }
 ]

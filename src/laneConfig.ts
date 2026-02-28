@@ -4,7 +4,6 @@ export const LANE_ORDER: string[] = [
   geneticLines.heretic,
   geneticLines.hexen,
   geneticLines.strife,
-  geneticLines.dosdoom,
   geneticLines.doomsday,
   geneticLines.vavoom,
   geneticLines.eternity,
@@ -39,8 +38,6 @@ export function getLaneDisplayName(key: string): string {
       return "Chocolate";
     case geneticLines.eternity:
       return "Eternity";
-    case geneticLines.dosdoom:
-      return "DOSDoom";
     case geneticLines.doomsday:
       return "Doomsday";
     case geneticLines.vavoom:
@@ -74,8 +71,6 @@ export function getLaneColors(
       return { background: "#E6F5FF", stroke: "#0066CC" };
     case geneticLines.eternity:
       return { background: "#E0F7FA", stroke: "#00838F" };
-    case geneticLines.dosdoom:
-      return { background: "#FFF3E0", stroke: "#EF6C00" };
     case geneticLines.doomsday:
       return { background: "#ECEFF1", stroke: "#455A64" };
     case geneticLines.vavoom:
