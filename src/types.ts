@@ -50,6 +50,12 @@ export interface LayoutLink {
   targetX: number;
   targetY: number;
   isPrimary: boolean;
+  /** World-space cubic Bézier control points. When present the renderer uses
+   *  these instead of computing an S-curve from the endpoints in screen space. */
+  c1x?: number;
+  c1y?: number;
+  c2x?: number;
+  c2y?: number;
 }
 
 export interface LayoutLane {

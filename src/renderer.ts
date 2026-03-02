@@ -584,12 +584,20 @@ function renderSingleLink(
 
   ctx.beginPath();
 
-  const { c1x, c1y, c2x, c2y } = getSCurveControlPoints(
-    startX,
-    startY,
-    endX,
-    endY
-  );
+  let c1x: number, c1y: number, c2x: number, c2y: number;
+  if (
+    line.c1x !== undefined &&
+    line.c1y !== undefined &&
+    line.c2x !== undefined &&
+    line.c2y !== undefined
+  ) {
+    // Use world-space control points from the router, transformed to screen
+    [c1x, c1y] = worldToScreen(line.c1x, line.c1y);
+    [c2x, c2y] = worldToScreen(line.c2x, line.c2y);
+  } else {
+    // Fallback: S-curve computed in screen space
+    ({ c1x, c1y, c2x, c2y } = getSCurveControlPoints(startX, startY, endX, endY));
+  }
 
   ctx.moveTo(startX, startY);
   ctx.bezierCurveTo(c1x, c1y, c2x, c2y, endX, endY);
