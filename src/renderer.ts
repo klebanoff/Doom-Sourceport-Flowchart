@@ -79,9 +79,10 @@ export function drawScene(
   beginContentClip(context);
 
   drawLaneBackgrounds(context);
-  drawTimelineAxis(context);
+  drawTimelineGrid(context);
   renderLinks(context);
   renderNodes(context);
+  drawYearLabels(context);
 
   endContentClip(context);
   drawContentBorder(context);
@@ -471,13 +472,8 @@ function drawLaneBackgrounds(context: RenderContext): void {
   }
 }
 
-function drawTimelineAxis(context: RenderContext): void {
-  const {
-    ctx,
-    render,
-    worldToScreen,
-    scale,
-  } = context;
+function drawTimelineGrid(context: RenderContext): void {
+  const { ctx, render, worldToScreen, scale } = context;
 
   if (
     !render.timelineMarkers ||
@@ -490,42 +486,82 @@ function drawTimelineAxis(context: RenderContext): void {
 
   const laneExtents = computeLaneExtents(render);
   const framePadding = 80 * scale;
-
   const { frameLeft, frameRight, frameTop, frameBottom, axisY } =
     computeFrameBounds(context, laneExtents, framePadding);
 
   ctx.save();
   ctx.strokeStyle = "#888888";
-  ctx.fillStyle = "#000000";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "bottom";
-
-  const yearLabelFontSize = Math.max(MIN_YEAR_LABEL_FONT_SIZE, 20 * scale);
-  const yearLabelScreenY = frameTop - 4;
-
-  ctx.font = `${yearLabelFontSize}px sans-serif`;
 
   for (let i = 0; i < render.timelineMarkers.length; i++) {
     const marker = render.timelineMarkers[i];
     const [markerX] = worldToScreen(marker.x, axisY);
 
+    ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(markerX, frameTop);
     ctx.lineTo(markerX, frameBottom);
     ctx.stroke();
-
-    ctx.fillText(String(marker.year), markerX, yearLabelScreenY);
   }
 
-  ctx.beginPath();
   ctx.lineWidth = 4;
-  ctx.rect(
-    frameLeft,
-    frameTop,
-    frameRight - frameLeft,
-    frameBottom - frameTop
-  );
+  ctx.beginPath();
+  ctx.rect(frameLeft, frameTop, frameRight - frameLeft, frameBottom - frameTop);
   ctx.stroke();
+
+  ctx.restore();
+}
+
+function drawYearLabels(context: RenderContext): void {
+  const { ctx, render, worldToScreen, scale, contentTop } = context;
+
+  if (
+    !render.timelineMarkers ||
+    render.timelineMarkers.length === 0 ||
+    !render.lanes ||
+    render.lanes.length === 0
+  ) {
+    return;
+  }
+
+  const laneExtents = computeLaneExtents(render);
+  const framePadding = 80 * scale;
+  const { frameTop, axisY } = computeFrameBounds(context, laneExtents, framePadding);
+
+  ctx.save();
+  ctx.textAlign = "center";
+  ctx.textBaseline = "bottom";
+
+  const yearLabelFontSize = Math.max(MIN_YEAR_LABEL_FONT_SIZE, 20 * scale);
+  ctx.font = `${yearLabelFontSize}px sans-serif`;
+
+  const labelPadV = 3;
+  const labelPadH = 6;
+  // Sticky: clamp so the label stays inside the content area when the frame
+  // top is scrolled to the content edge.
+  const naturalYearLabelBottom = frameTop - 4;
+  const minYearLabelBottom = contentTop + yearLabelFontSize + labelPadV;
+  const yearLabelScreenY = Math.max(naturalYearLabelBottom, minYearLabelBottom);
+
+  for (let i = 0; i < render.timelineMarkers.length; i++) {
+    const marker = render.timelineMarkers[i];
+    const [markerX] = worldToScreen(marker.x, axisY);
+
+    const label = String(marker.year);
+    const textWidth = ctx.measureText(label).width;
+    const bgX = markerX - textWidth / 2 - labelPadH;
+    const bgY = yearLabelScreenY - yearLabelFontSize - labelPadV;
+    const bgW = textWidth + labelPadH * 2;
+    const bgH = yearLabelFontSize + labelPadV * 2;
+
+    ctx.fillStyle = "rgba(255, 255, 255, 0.88)";
+    ctx.fillRect(bgX, bgY, bgW, bgH);
+    ctx.strokeStyle = "rgba(136, 136, 136, 0.5)";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(bgX, bgY, bgW, bgH);
+
+    ctx.fillStyle = "#000000";
+    ctx.fillText(label, markerX, yearLabelScreenY);
+  }
 
   ctx.restore();
 }

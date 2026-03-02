@@ -6,6 +6,10 @@ const ROUTE_PADDING = 10;
 const EPSILON = 1e-6;
 // Expand the source–target bounding box by this amount when filtering obstacles.
 const CORRIDOR_MARGIN = 2 * Math.max(NODE_WIDTH, NODE_HEIGHT);
+// Corners are only generated from the N obstacles closest to the direct path.
+// All obstacles are still used in isLineClear checks — this bounds the O(n²×k)
+// visibility-graph cost without affecting routing correctness.
+const MAX_WAYPOINT_OBSTACLES = 10;
 
 function getBoundaryPoint(rect: Rect, target: Point): Point {
   const cx = (rect.left + rect.right) / 2;
@@ -214,6 +218,15 @@ function fitCubicControlPoints(
   };
 }
 
+function pointToSegmentDistSq(p: Point, a: Point, b: Point): number {
+  const dx = b.x - a.x;
+  const dy = b.y - a.y;
+  const lenSq = dx * dx + dy * dy;
+  if (lenSq < EPSILON) return (p.x - a.x) ** 2 + (p.y - a.y) ** 2;
+  const t = Math.max(0, Math.min(1, ((p.x - a.x) * dx + (p.y - a.y) * dy) / lenSq));
+  return (p.x - a.x - t * dx) ** 2 + (p.y - a.y - t * dy) ** 2;
+}
+
 function collinearControls(
   start: Point,
   end: Point
@@ -278,8 +291,26 @@ function routeLink(link: LayoutLink, nodeMap: Map<string, LayoutNode>): void {
     return;
   }
 
+  // Only generate corners from the N closest obstacles to the direct path.
+  // isLineClear still checks all paddedObstacles, preserving correctness.
+  const cornerSources =
+    paddedObstacles.length <= MAX_WAYPOINT_OBSTACLES
+      ? paddedObstacles
+      : paddedObstacles
+          .map((obs) => ({
+            obs,
+            dSq: pointToSegmentDistSq(
+              { x: (obs.left + obs.right) / 2, y: (obs.top + obs.bottom) / 2 },
+              startPoint,
+              endPoint
+            ),
+          }))
+          .sort((a, b) => a.dSq - b.dSq)
+          .slice(0, MAX_WAYPOINT_OBSTACLES)
+          .map((x) => x.obs);
+
   const waypoints: Point[] = [startPoint, endPoint];
-  for (const obs of paddedObstacles) {
+  for (const obs of cornerSources) {
     for (const corner of cornersOf(obs)) {
       const insideAny = paddedObstacles.some(
         (o) =>
