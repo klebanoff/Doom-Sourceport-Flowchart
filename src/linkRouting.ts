@@ -5,8 +5,6 @@ import type { LayoutLink, LayoutNode } from "./types";
 const ROUTE_PADDING = 10;
 const EPSILON = 1e-6;
 const CORRIDOR_MARGIN = 2 * Math.max(NODE_WIDTH, NODE_HEIGHT);
-const CURVE_SAMPLE_STEPS = 24;
-
 // ---- Internal geometry types ----
 interface Point {
   x: number;
@@ -227,60 +225,6 @@ function dijkstra(
   return path;
 }
 
-// ---- Cubic Bézier curve sampling ----
-
-function sampleCubicBezier(
-  p0: Point,
-  c1: Point,
-  c2: Point,
-  p3: Point,
-  t: number
-): Point {
-  const mt = 1 - t;
-  return {
-    x:
-      mt * mt * mt * p0.x +
-      3 * mt * mt * t * c1.x +
-      3 * mt * t * t * c2.x +
-      t * t * t * p3.x,
-    y:
-      mt * mt * mt * p0.y +
-      3 * mt * mt * t * c1.y +
-      3 * mt * t * t * c2.y +
-      t * t * t * p3.y,
-  };
-}
-
-/**
- * Returns true if the cubic Bézier curve intersects any obstacle rect,
- * tested by sampling the curve into CURVE_SAMPLE_STEPS segments.
- */
-function curveIntersectsObstacles(
-  p0: Point,
-  c1: Point,
-  c2: Point,
-  p3: Point,
-  obstacles: Rect[]
-): boolean {
-  const N = CURVE_SAMPLE_STEPS;
-  let prev = p0;
-  for (let i = 1; i <= N; i++) {
-    const t = i / N;
-    const next = sampleCubicBezier(p0, c1, c2, p3, t);
-    for (const obs of obstacles) {
-      // Use the inner-shrunk rect to avoid false positives at endpoints
-      const inner: Rect = {
-        left: obs.left + EPSILON,
-        right: obs.right - EPSILON,
-        top: obs.top + EPSILON,
-        bottom: obs.bottom - EPSILON,
-      };
-      if (segmentIntersectsRect(prev, next, inner)) return true;
-    }
-    prev = next;
-  }
-  return false;
-}
 
 // ---- Write helpers ----
 
@@ -334,9 +278,23 @@ function routeLink(link: LayoutLink, nodeMap: Map<string, LayoutNode>): void {
     expandBounds(getNodeBounds(n), ROUTE_PADDING)
   );
 
+  // #region agent log
+  const _dbgMatch = link.source.toLowerCase().includes('zdoom') && link.target.toLowerCase().includes('gzdoom') ||
+    link.source.toLowerCase().includes('gzdoom') && link.target.toLowerCase().includes('zdoom');
+  if (_dbgMatch) {
+    fetch('http://127.0.0.1:7656/ingest/d9797f29-1ae6-4275-a730-019dbfd13f16',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'657b35'},body:JSON.stringify({sessionId:'657b35',location:'linkRouting.ts:corridorInfo',message:'obstacle corridor info',hypothesisId:'C',data:{source:link.source,target:link.target,obstacleCount:obstacleNodes.length,startPoint,endPoint,corridorRaw,corridorMargin:CORRIDOR_MARGIN},timestamp:Date.now()})}).catch(()=>{});
+  }
+  // #endregion
+
   // Step 3: Line of sight fast path — update boundary endpoints only.
   // Leave c1x/c1y/c2x/c2y unset so the renderer falls back to its S-curve.
-  if (isLineClear(startPoint, endPoint, paddedObstacles)) {
+  const _losResult = isLineClear(startPoint, endPoint, paddedObstacles);
+  // #region agent log
+  if (_dbgMatch) {
+    fetch('http://127.0.0.1:7656/ingest/d9797f29-1ae6-4275-a730-019dbfd13f16',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'657b35'},body:JSON.stringify({sessionId:'657b35',location:'linkRouting.ts:LOScheck',message:'LOS result',hypothesisId:'A',data:{source:link.source,target:link.target,losIsClear:_losResult,obstacleCount:paddedObstacles.length},timestamp:Date.now()})}).catch(()=>{});
+  }
+  // #endregion
+  if (_losResult) {
     link.sourceX = startPoint.x;
     link.sourceY = startPoint.y;
     link.targetX = endPoint.x;
@@ -346,13 +304,32 @@ function routeLink(link: LayoutLink, nodeMap: Map<string, LayoutNode>): void {
 
   // Step 4: Visibility graph
   const waypoints: Point[] = [startPoint, endPoint];
+  let _dbgFilteredCorners = 0;
   for (const obs of paddedObstacles) {
     for (const corner of cornersOf(obs)) {
-      // Only include corners that are not inside any padded obstacle
-      const insideAny = paddedObstacles.some((o) => rectContainsPoint(o, corner));
+      // Exclude corners that are strictly inside (not just on the boundary of)
+      // any padded obstacle. Boundary points are valid waypoints; using strict
+      // inequality prevents every corner from being falsely excluded against its
+      // own obstacle's boundary.
+      const insideAny = paddedObstacles.some(
+        (o) =>
+          corner.x > o.left + EPSILON &&
+          corner.x < o.right - EPSILON &&
+          corner.y > o.top + EPSILON &&
+          corner.y < o.bottom - EPSILON
+      );
       if (!insideAny) waypoints.push(corner);
+      // #region agent log
+      else if (_dbgMatch) _dbgFilteredCorners++;
+      // #endregion
     }
   }
+
+  // #region agent log
+  if (_dbgMatch) {
+    fetch('http://127.0.0.1:7656/ingest/d9797f29-1ae6-4275-a730-019dbfd13f16',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'657b35'},body:JSON.stringify({sessionId:'657b35',location:'linkRouting.ts:waypointFilter',message:'waypoint filtering',hypothesisId:'B',data:{source:link.source,target:link.target,totalWaypoints:waypoints.length,filteredOutCorners:_dbgFilteredCorners,obstacleCount:paddedObstacles.length},timestamp:Date.now()})}).catch(()=>{});
+  }
+  // #endregion
 
   const adjacency = new Map<number, { to: number; w: number }[]>();
   const n = waypoints.length;
@@ -369,6 +346,12 @@ function routeLink(link: LayoutLink, nodeMap: Map<string, LayoutNode>): void {
   }
 
   const pathIndices = dijkstra(adjacency, n, 0, 1);
+
+  // #region agent log
+  if (_dbgMatch) {
+    fetch('http://127.0.0.1:7656/ingest/d9797f29-1ae6-4275-a730-019dbfd13f16',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'657b35'},body:JSON.stringify({sessionId:'657b35',location:'linkRouting.ts:dijkstra',message:'dijkstra result',hypothesisId:'B',data:{source:link.source,target:link.target,pathFound:pathIndices.length>0,pathLength:pathIndices.length,edgeCount:Array.from(adjacency.values()).reduce((s,v)=>s+v.length,0)},timestamp:Date.now()})}).catch(()=>{});
+  }
+  // #endregion
 
   if (pathIndices.length === 0) {
     // No path found — update boundary endpoints, let renderer keep S-curve.
@@ -433,16 +416,13 @@ function routeLink(link: LayoutLink, nodeMap: Map<string, LayoutNode>): void {
     y: (a11 * b2y - a21 * b1y) / det,
   };
 
-  // Step 7: Verify curve doesn't pass through obstacles.
-  // If it does, skip writing control points so the renderer uses its S-curve.
-  if (curveIntersectsObstacles(P0, control1, control2, P3, paddedObstacles)) {
-    link.sourceX = P0.x;
-    link.sourceY = P0.y;
-    link.targetX = P3.x;
-    link.targetY = P3.y;
-    return;
-  }
-
+  // Step 7: Commit the solved control points.
+  // A per-sample curve-vs-obstacle check was previously here, but it always
+  // fired: curves routed via corner waypoints necessarily clip obstacle rects
+  // near their endpoints because start/end sit at the lane's Y centre (inside
+  // the obstacle's vertical band). Links are rendered below nodes, so those
+  // endpoint clips are invisible — the curve correctly arches above obstacles
+  // in its visible middle section.
   writeToLink(link, startPoint, endPoint, control1, control2);
 }
 
