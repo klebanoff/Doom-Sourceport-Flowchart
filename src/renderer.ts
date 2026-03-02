@@ -15,6 +15,7 @@ import type {
 } from "./types";
 import { getSCurveControlPoints } from "./geometry";
 
+
 function darkenColor(hex: string, factor: number): string {
   const match = /^#([0-9a-fA-F]{6})$/.exec(hex);
   if (!match) {
@@ -78,9 +79,10 @@ export function drawScene(
   beginContentClip(context);
 
   drawLaneBackgrounds(context);
-  drawTimelineAxis(context);
+  drawTimelineGrid(context);
   renderLinks(context);
   renderNodes(context);
+  drawYearLabels(context);
 
   endContentClip(context);
   drawContentBorder(context);
@@ -470,13 +472,8 @@ function drawLaneBackgrounds(context: RenderContext): void {
   }
 }
 
-function drawTimelineAxis(context: RenderContext): void {
-  const {
-    ctx,
-    render,
-    worldToScreen,
-    scale,
-  } = context;
+function drawTimelineGrid(context: RenderContext): void {
+  const { ctx, render, worldToScreen, scale } = context;
 
   if (
     !render.timelineMarkers ||
@@ -489,42 +486,82 @@ function drawTimelineAxis(context: RenderContext): void {
 
   const laneExtents = computeLaneExtents(render);
   const framePadding = 80 * scale;
-
   const { frameLeft, frameRight, frameTop, frameBottom, axisY } =
     computeFrameBounds(context, laneExtents, framePadding);
 
   ctx.save();
   ctx.strokeStyle = "#888888";
-  ctx.fillStyle = "#000000";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "bottom";
-
-  const yearLabelFontSize = Math.max(MIN_YEAR_LABEL_FONT_SIZE, 20 * scale);
-  const yearLabelScreenY = frameTop - 4;
-
-  ctx.font = `${yearLabelFontSize}px sans-serif`;
 
   for (let i = 0; i < render.timelineMarkers.length; i++) {
     const marker = render.timelineMarkers[i];
     const [markerX] = worldToScreen(marker.x, axisY);
 
+    ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(markerX, frameTop);
     ctx.lineTo(markerX, frameBottom);
     ctx.stroke();
-
-    ctx.fillText(String(marker.year), markerX, yearLabelScreenY);
   }
 
-  ctx.beginPath();
   ctx.lineWidth = 4;
-  ctx.rect(
-    frameLeft,
-    frameTop,
-    frameRight - frameLeft,
-    frameBottom - frameTop
-  );
+  ctx.beginPath();
+  ctx.rect(frameLeft, frameTop, frameRight - frameLeft, frameBottom - frameTop);
   ctx.stroke();
+
+  ctx.restore();
+}
+
+function drawYearLabels(context: RenderContext): void {
+  const { ctx, render, worldToScreen, scale, contentTop } = context;
+
+  if (
+    !render.timelineMarkers ||
+    render.timelineMarkers.length === 0 ||
+    !render.lanes ||
+    render.lanes.length === 0
+  ) {
+    return;
+  }
+
+  const laneExtents = computeLaneExtents(render);
+  const framePadding = 80 * scale;
+  const { frameTop, axisY } = computeFrameBounds(context, laneExtents, framePadding);
+
+  ctx.save();
+  ctx.textAlign = "center";
+  ctx.textBaseline = "bottom";
+
+  const yearLabelFontSize = Math.max(MIN_YEAR_LABEL_FONT_SIZE, 20 * scale);
+  ctx.font = `${yearLabelFontSize}px sans-serif`;
+
+  const labelPadV = 3;
+  const labelPadH = 6;
+  // Sticky: clamp so the label stays inside the content area when the frame
+  // top is scrolled to the content edge.
+  const naturalYearLabelBottom = frameTop - 4;
+  const minYearLabelBottom = contentTop + yearLabelFontSize + labelPadV;
+  const yearLabelScreenY = Math.max(naturalYearLabelBottom, minYearLabelBottom);
+
+  for (let i = 0; i < render.timelineMarkers.length; i++) {
+    const marker = render.timelineMarkers[i];
+    const [markerX] = worldToScreen(marker.x, axisY);
+
+    const label = String(marker.year);
+    const textWidth = ctx.measureText(label).width;
+    const bgX = markerX - textWidth / 2 - labelPadH;
+    const bgY = yearLabelScreenY - yearLabelFontSize - labelPadV;
+    const bgW = textWidth + labelPadH * 2;
+    const bgH = yearLabelFontSize + labelPadV * 2;
+
+    ctx.fillStyle = "rgba(255, 255, 255, 0.88)";
+    ctx.fillRect(bgX, bgY, bgW, bgH);
+    ctx.strokeStyle = "rgba(136, 136, 136, 0.5)";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(bgX, bgY, bgW, bgH);
+
+    ctx.fillStyle = "#000000";
+    ctx.fillText(label, markerX, yearLabelScreenY);
+  }
 
   ctx.restore();
 }
@@ -583,45 +620,23 @@ function renderSingleLink(
 
   ctx.beginPath();
 
-  const waypoints = line.waypoints ?? [];
-
-  if (!waypoints.length) {
-    const { c1x, c1y, c2x, c2y } = getSCurveControlPoints(
-      startX,
-      startY,
-      endX,
-      endY
-    );
-
-    ctx.moveTo(startX, startY);
-    ctx.bezierCurveTo(c1x, c1y, c2x, c2y, endX, endY);
+  let c1x: number, c1y: number, c2x: number, c2y: number;
+  if (
+    line.c1x !== undefined &&
+    line.c1y !== undefined &&
+    line.c2x !== undefined &&
+    line.c2y !== undefined
+  ) {
+    // Use world-space control points from the router, transformed to screen
+    [c1x, c1y] = worldToScreen(line.c1x, line.c1y);
+    [c2x, c2y] = worldToScreen(line.c2x, line.c2y);
   } else {
-    const points: { x: number; y: number }[] = [];
-    points.push({ x: startX, y: startY });
-
-    for (let i = 0; i < waypoints.length; i++) {
-      const [wx, wy] = worldToScreen(waypoints[i].x, waypoints[i].y);
-      points.push({ x: wx, y: wy });
-    }
-
-    points.push({ x: endX, y: endY });
-
-    ctx.moveTo(points[0].x, points[0].y);
-
-    for (let i = 0; i < points.length - 1; i++) {
-      const p0 = points[i];
-      const p1 = points[i + 1];
-
-      const { c1x, c1y, c2x, c2y } = getSCurveControlPoints(
-        p0.x,
-        p0.y,
-        p1.x,
-        p1.y
-      );
-
-      ctx.bezierCurveTo(c1x, c1y, c2x, c2y, p1.x, p1.y);
-    }
+    // Fallback: S-curve computed in screen space
+    ({ c1x, c1y, c2x, c2y } = getSCurveControlPoints(startX, startY, endX, endY));
   }
+
+  ctx.moveTo(startX, startY);
+  ctx.bezierCurveTo(c1x, c1y, c2x, c2y, endX, endY);
 
   ctx.setLineDash(line.isPrimary ? [] : [10 * scale, 6 * scale]);
 

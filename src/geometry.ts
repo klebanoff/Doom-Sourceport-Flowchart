@@ -1,3 +1,6 @@
+import { NODE_HEIGHT, NODE_WIDTH } from "./constants";
+import { LayoutNode, Point, Rect } from "./types";
+
 export interface SCurveControlPoints {
   c1x: number;
   c1y: number;
@@ -46,3 +49,41 @@ export function sampleSCurve(
   return [x, y];
 }
 
+
+export function getNodeBounds(node: LayoutNode): Rect {
+  return {
+    left: node.X - NODE_WIDTH / 2,
+    right: node.X + NODE_WIDTH / 2,
+    top: node.Y - NODE_HEIGHT / 2,
+    bottom: node.Y + NODE_HEIGHT / 2,
+  };
+}
+
+export function expandBounds(rect: Rect, padding: number): Rect {
+  return {
+    left: rect.left - padding,
+    right: rect.right + padding,
+    top: rect.top - padding,
+    bottom: rect.bottom + padding,
+  };
+}
+
+
+export function rectsIntersect(a: Rect, b: Rect): boolean {
+  return a.left <= b.right && a.right >= b.left && a.top <= b.bottom && a.bottom >= b.top;
+}
+
+export function cornersOf(rect: Rect): Point[] {
+  return [
+    { x: rect.left, y: rect.top },
+    { x: rect.right, y: rect.top },
+    { x: rect.right, y: rect.bottom },
+    { x: rect.left, y: rect.bottom },
+  ];
+}
+
+export function dist(a: Point, b: Point): number {
+  const dx = b.x - a.x;
+  const dy = b.y - a.y;
+  return Math.sqrt(dx * dx + dy * dy);
+}

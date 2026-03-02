@@ -50,7 +50,12 @@ export interface LayoutLink {
   targetX: number;
   targetY: number;
   isPrimary: boolean;
-  waypoints?: { x: number; y: number }[];
+  /** World-space cubic Bézier control points. When present the renderer uses
+   *  these instead of computing an S-curve from the endpoints in screen space. */
+  c1x?: number;
+  c1y?: number;
+  c2x?: number;
+  c2y?: number;
 }
 
 export interface LayoutLane {
@@ -82,3 +87,9 @@ export interface CameraLike {
   screenToWorld(x: number, y: number): [number, number];
 }
 
+interface Rect {
+  left: number;
+  right: number;
+  top: number;
+  bottom: number;
+}
