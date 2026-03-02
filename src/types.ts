@@ -87,7 +87,12 @@ export interface CameraLike {
   screenToWorld(x: number, y: number): [number, number];
 }
 
-interface Rect {
+export interface Point {
+  x: number;
+  y: number;
+}
+
+export interface Rect {
   left: number;
   right: number;
   top: number;
