@@ -304,10 +304,10 @@ function computeSnappedScreenPositions(
     const [nodeScreenX, nodeScreenY] = camera.worldToScreen(node.X, node.Y);
 
     if (
-      nodeScreenX >= 0 &&
-      nodeScreenX <= screenWidth &&
-      nodeScreenY >= 0 &&
-      nodeScreenY <= screenHeight
+      nodeScreenX >= minX &&
+      nodeScreenX <= maxX &&
+      nodeScreenY >= minY &&
+      nodeScreenY <= maxY
     ) {
       continue;
     }

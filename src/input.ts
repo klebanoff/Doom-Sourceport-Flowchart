@@ -11,7 +11,8 @@ export function setupInputHandlers(
   camera: CameraLike,
   onDraw: DrawCallback,
   getNodeIdAtScreenPosition: (x: number, y: number) => string | null,
-  onHoverNodeChange: (id: string | null) => void
+  onHoverNodeChange: (id: string | null) => void,
+  onCameraMove?: () => boolean
 ): void {
   let prevMouseX = 0;
   let prevMouseY = 0;
@@ -31,6 +32,7 @@ export function setupInputHandlers(
   canvas.onmousedown = handlePointerDown;
   document.body.addEventListener("mousemove", handlePointerMove);
   document.body.addEventListener("mouseup", handlePointerUp);
+  canvas.addEventListener("mouseleave", clearHover);
 
   canvas.addEventListener("touchstart", (event: TouchEvent) => {
     onTouchStart(event.touches);
@@ -39,6 +41,9 @@ export function setupInputHandlers(
   canvas.addEventListener("touchmove", (event: TouchEvent) => {
     onTouchMove(event.touches);
   });
+
+  canvas.addEventListener("touchend", clearHover);
+  canvas.addEventListener("touchcancel", clearHover);
 
   canvas.onwheel = (e: WheelEvent) => {
     e.preventDefault();
@@ -50,6 +55,14 @@ export function setupInputHandlers(
     onDraw();
   };
 
+  function clearHover(): void {
+    if (currentHoveredId === null) {
+      return;
+    }
+    currentHoveredId = null;
+    onHoverNodeChange(null);
+  }
+
   function updateHover(screenX: number, screenY: number): void {
     const id = getNodeIdAtScreenPosition(screenX, screenY);
     if (id === currentHoveredId) {
@@ -60,49 +73,22 @@ export function setupInputHandlers(
     onHoverNodeChange(id);
   }
 
-  function handlePointerDown(e: MouseEvent | TouchEvent): void {
+  function handlePointerDown(e: MouseEvent): void {
     touching = true;
-    let x = 0;
-    let y = 0;
-    if (e.type === "touchstart") {
-      const touchEvent = e as TouchEvent;
-      const firstTouch = touchEvent.touches[0];
-      if (!firstTouch) return;
-      x = firstTouch.clientX;
-      y = firstTouch.clientY;
-    } else {
-      const mouseEvent = e as MouseEvent;
-      x = mouseEvent.clientX;
-      y = mouseEvent.clientY;
-    }
-    prevMouseX = x;
-    prevMouseY = y;
-    updateHover(x, y);
+    prevMouseX = e.clientX;
+    prevMouseY = e.clientY;
+    updateHover(e.clientX, e.clientY);
   }
 
-  function handlePointerMove(e: MouseEvent | TouchEvent): void {
-    let x = 0;
-    let y = 0;
-    if (e.type === "touchmove") {
-      const touchEvent = e as TouchEvent;
-      const firstTouch = touchEvent.touches[0];
-      if (!firstTouch) return;
-      x = firstTouch.clientX;
-      y = firstTouch.clientY;
-    } else {
-      const mouseEvent = e as MouseEvent;
-      x = mouseEvent.clientX;
-      y = mouseEvent.clientY;
-    }
-
-    updateHover(x, y);
+  function handlePointerMove(e: MouseEvent): void {
+    updateHover(e.clientX, e.clientY);
 
     if (!touching) return;
 
-    camera.offsetX -= (x - prevMouseX) / camera.scale;
-    camera.offsetY -= (y - prevMouseY) / camera.scale;
-    prevMouseX = x;
-    prevMouseY = y;
+    camera.offsetX -= (e.clientX - prevMouseX) / camera.scale;
+    camera.offsetY -= (e.clientY - prevMouseY) / camera.scale;
+    prevMouseX = e.clientX;
+    prevMouseY = e.clientY;
     onDraw();
   }
 
@@ -113,6 +99,10 @@ export function setupInputHandlers(
   function onTouchStart(touches: TouchList): void {
     if (touches.length === 1) {
       touchMode = "single";
+      const firstTouch = touches[0];
+      if (firstTouch) {
+        updateHover(firstTouch.clientX, firstTouch.clientY);
+      }
     } else if (touches.length >= 2) {
       touchMode = "double";
     }
@@ -140,6 +130,8 @@ export function setupInputHandlers(
 
       camera.offsetX -= panX / camera.scale;
       camera.offsetY -= panY / camera.scale;
+      const hoverCleared = onCameraMove?.() ?? false;
+      if (hoverCleared) currentHoveredId = null;
       onDraw();
     }
 
@@ -166,6 +158,8 @@ export function setupInputHandlers(
         if (distancePreviousTouches !== 0) {
           const zoomAmount = distanceCurrentTouches / distancePreviousTouches;
           camera.scale *= zoomAmount;
+          const hoverCleared = onCameraMove?.() ?? false;
+          if (hoverCleared) currentHoveredId = null;
           onDraw();
         }
       }

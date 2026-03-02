@@ -88,15 +88,26 @@ async function init(): Promise<void> {
   };
 
   const handleHoverChange = (id: string | null) => {
-    if (hoveredNodeId === id) {
-      return;
-    }
-
     hoveredNodeId = id;
     draw();
   };
 
-  setupInputHandlers(canvas, camera, draw, getNodeIdAtScreenPosition, handleHoverChange);
+  const onCameraMove = (): boolean => {
+    if (!hoveredNodeId) return false;
+    const node = render.nodes.find((n) => n.id === hoveredNodeId);
+    if (!node) {
+      hoveredNodeId = null;
+      return true;
+    }
+    const [sx, sy] = camera.worldToScreen(node.X, node.Y);
+    if (sx < 0 || sx > canvas.clientWidth || sy < 0 || sy > canvas.clientHeight) {
+      hoveredNodeId = null;
+      return true;
+    }
+    return false;
+  };
+
+  setupInputHandlers(canvas, camera, draw, getNodeIdAtScreenPosition, handleHoverChange, onCameraMove);
   draw();
 
   if (!useDevSample) {
