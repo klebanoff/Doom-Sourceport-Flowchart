@@ -191,7 +191,7 @@ async function init(): Promise<void> {
     return false;
   };
 
-  const checkIsInPanel = (x: number, y: number): boolean =>
+  const checkIsInPanel = (y: number): boolean =>
     tappedNodeId !== null && isInPanel(canvas, y);
 
   const handleCameraChange = (): void => {
