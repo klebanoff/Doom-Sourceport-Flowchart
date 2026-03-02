@@ -28,8 +28,27 @@ export interface DoomNode {
   releaseDate: string;
   geneticLine: GeneticLine;
   developmentStatus?: DevelopmentStatus;
+  description?: string;
   children?: string[];
   parents?: string[];
+}
+
+export interface LinkHitArea {
+  url: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+export interface TooltipBounds {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  nodeScreenX: number;
+  nodeScreenY: number;
+  isAboveNode: boolean;
 }
 
 export type DoomData = DoomNode[];

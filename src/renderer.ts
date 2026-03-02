@@ -12,6 +12,8 @@ import type {
   LayoutResult,
   LayoutNode,
   DevelopmentStatus,
+  LinkHitArea,
+  TooltipBounds,
 } from "./types";
 import { getSCurveControlPoints } from "./geometry";
 
@@ -45,7 +47,7 @@ interface RenderContext {
   canvas: HTMLCanvasElement;
   camera: CameraLike;
   render: LayoutResult;
-  hoveredNodeId: string | null;
+  highlightNodeId: string | null;
   scale: number;
   worldToScreen(x: number, y: number): [number, number];
   contentLeft: number;
@@ -63,17 +65,23 @@ interface LaneExtents {
   axisY: number;
 }
 
+export interface DrawSceneResult {
+  linkAreas: LinkHitArea[];
+  tooltipBounds: TooltipBounds | null;
+}
+
 export function drawScene(
   ctx: CanvasRenderingContext2D,
   canvas: HTMLCanvasElement,
   camera: CameraLike,
   render: LayoutResult,
-  hoveredNodeId: string | null
-): void {
+  highlightNodeId: string | null,
+  showTooltip: boolean
+): DrawSceneResult {
   const dpr = window.devicePixelRatio || 1;
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-  const context = createRenderContext(ctx, canvas, camera, render, hoveredNodeId);
+  const context = createRenderContext(ctx, canvas, camera, render, highlightNodeId);
 
   clearCanvas(context);
   beginContentClip(context);
@@ -87,6 +95,11 @@ export function drawScene(
   endContentClip(context);
   drawContentBorder(context);
   drawLegend(context);
+
+  if (showTooltip) {
+    return drawTooltip(context);
+  }
+  return { linkAreas: [], tooltipBounds: null };
 }
 
 function createRenderContext(
@@ -94,7 +107,7 @@ function createRenderContext(
   canvas: HTMLCanvasElement,
   camera: CameraLike,
   render: LayoutResult,
-  hoveredNodeId: string | null
+  highlightNodeId: string | null
 ): RenderContext {
   const scale = camera.scale;
   const worldToScreen = (x: number, y: number) => camera.worldToScreen(x, y);
@@ -104,13 +117,13 @@ function createRenderContext(
   const contentWidth = canvas.clientWidth - 2 * VIEWPORT_PADDING;
   const contentHeight = canvas.clientHeight - 2 * VIEWPORT_PADDING;
 
-  const relatedNodeIds = computeRelatedNodeIds(render, hoveredNodeId);
+  const relatedNodeIds = computeRelatedNodeIds(render, highlightNodeId);
   const snappedScreenPositions = computeSnappedScreenPositions(
     render,
     camera,
     canvas,
     relatedNodeIds,
-    hoveredNodeId
+    highlightNodeId
   );
 
   return {
@@ -118,7 +131,7 @@ function createRenderContext(
     canvas,
     camera,
     render,
-    hoveredNodeId,
+    highlightNodeId,
     scale,
     worldToScreen,
     contentLeft,
@@ -583,7 +596,7 @@ function renderSingleLink(
     render,
     worldToScreen,
     snappedScreenPositions,
-    hoveredNodeId,
+    highlightNodeId,
     scale,
   } = context;
 
@@ -607,10 +620,10 @@ function renderSingleLink(
     parentNode && parentNode._laneKey ? parentNode._laneKey : "other";
   const colors = getLaneColors(laneKey);
 
-  const hasHover = !!hoveredNodeId;
+  const hasHover = !!highlightNodeId;
   const isHoveredLink =
-    !!hoveredNodeId &&
-    (line.source === hoveredNodeId || line.target === hoveredNodeId);
+    !!highlightNodeId &&
+    (line.source === highlightNodeId || line.target === highlightNodeId);
 
   ctx.save();
 
@@ -734,7 +747,7 @@ function renderSingleNode(context: RenderContext, node: LayoutNode): void {
     ctx,
     worldToScreen,
     snappedScreenPositions,
-    hoveredNodeId,
+    highlightNodeId,
     relatedNodeIds,
     scale,
   } = context;
@@ -773,8 +786,8 @@ function renderSingleNode(context: RenderContext, node: LayoutNode): void {
       break;
   }
 
-  const hasHover = !!hoveredNodeId;
-  const isHovered = hoveredNodeId === node.id;
+  const hasHover = !!highlightNodeId;
+  const isHovered = highlightNodeId === node.id;
   const isRelated = relatedNodeIds.has(node.id) && !isHovered;
   const isDimmed = hasHover && !isHovered && !isRelated;
 
@@ -938,4 +951,214 @@ function intersectSegmentWithRect(
   }
 
   return { x: hitX, y: hitY };
+}
+
+// ---------------------------------------------------------------------------
+// Tooltip
+// ---------------------------------------------------------------------------
+
+interface DescriptionSegment {
+  text: string;
+  url?: string;
+}
+
+interface LayoutToken {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  text: string;
+  url?: string;
+}
+
+export function parseDescriptionSegments(text: string): DescriptionSegment[] {
+  const segments: DescriptionSegment[] = [];
+  const linkPattern = /\[([^\]]+)\]\(([^)]+)\)/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = linkPattern.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      segments.push({ text: text.slice(lastIndex, match.index) });
+    }
+    segments.push({ text: match[1], url: match[2] });
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (lastIndex < text.length) {
+    segments.push({ text: text.slice(lastIndex) });
+  }
+
+  return segments;
+}
+
+export function layoutTokens(
+  ctx: CanvasRenderingContext2D,
+  segments: DescriptionSegment[],
+  startX: number,
+  startY: number,
+  maxWidth: number,
+  font: string,
+  lineHeight: number
+): LayoutToken[] {
+  ctx.save();
+  ctx.font = font;
+
+  const tokens: LayoutToken[] = [];
+  let cursorX = startX;
+  let cursorY = startY;
+
+  for (const segment of segments) {
+    const words = segment.text.split(/(\s+)/);
+    for (const word of words) {
+      if (word === "") continue;
+      const w = ctx.measureText(word).width;
+      if (/^\s+$/.test(word)) {
+        cursorX += w;
+        continue;
+      }
+      if (cursorX > startX && cursorX + w > startX + maxWidth) {
+        cursorX = startX;
+        cursorY += lineHeight;
+      }
+      tokens.push({
+        x: cursorX,
+        y: cursorY,
+        width: w,
+        height: lineHeight,
+        text: word,
+        url: segment.url,
+      });
+      cursorX += w + ctx.measureText(" ").width;
+    }
+  }
+
+  ctx.restore();
+  return tokens;
+}
+
+function drawTooltip(context: RenderContext): DrawSceneResult {
+  const { ctx, canvas, camera, render, highlightNodeId } = context;
+
+  if (!highlightNodeId) return { linkAreas: [], tooltipBounds: null };
+
+  const node = render.nodes.find((n) => n.id === highlightNodeId);
+  if (!node || !node.description) return { linkAreas: [], tooltipBounds: null };
+
+  const PADDING = 10;
+  const MAX_WIDTH = 260;
+  const FONT_SIZE = 13;
+  const LINE_HEIGHT = 18;
+  const HEADER_FONT = `bold ${FONT_SIZE}px sans-serif`;
+  const BODY_FONT = `${FONT_SIZE}px sans-serif`;
+  const GAP = 10;
+
+  const segments = parseDescriptionSegments(node.description);
+
+  // Measure body tokens to get total content height
+  const bodyTokens = layoutTokens(
+    ctx,
+    segments,
+    0,
+    0,
+    MAX_WIDTH - PADDING * 2,
+    BODY_FONT,
+    LINE_HEIGHT
+  );
+
+  const lastToken = bodyTokens[bodyTokens.length - 1];
+  const bodyContentHeight = lastToken
+    ? lastToken.y + lastToken.height
+    : LINE_HEIGHT;
+
+  const tooltipWidth = MAX_WIDTH;
+  const tooltipHeight = PADDING + LINE_HEIGHT + 4 + bodyContentHeight + PADDING;
+
+  const [nodeCX, nodeCY] = camera.worldToScreen(node.X, node.Y);
+  const nodeHalfH = (NODE_HEIGHT * camera.scale) / 2;
+
+  let tx = nodeCX - tooltipWidth / 2;
+  let ty = nodeCY - nodeHalfH - GAP - tooltipHeight;
+
+  if (ty < 4) {
+    ty = nodeCY + nodeHalfH + GAP;
+  }
+
+  tx = Math.max(4, Math.min(canvas.clientWidth - tooltipWidth - 4, tx));
+
+  const isAboveNode = ty < nodeCY;
+
+  const tooltipBounds: TooltipBounds = {
+    x: tx,
+    y: ty,
+    width: tooltipWidth,
+    height: tooltipHeight,
+    nodeScreenX: nodeCX,
+    nodeScreenY: nodeCY,
+    isAboveNode,
+  };
+
+  // Background
+  ctx.save();
+  ctx.shadowColor = "rgba(0, 0, 0, 0.4)";
+  ctx.shadowBlur = 10;
+  ctx.shadowOffsetY = 2;
+  ctx.fillStyle = "rgba(30, 30, 30, 0.94)";
+  ctx.beginPath();
+  if (typeof (ctx as any).roundRect === "function") {
+    (ctx as any).roundRect(tx, ty, tooltipWidth, tooltipHeight, 6);
+  } else {
+    ctx.rect(tx, ty, tooltipWidth, tooltipHeight);
+  }
+  ctx.fill();
+  ctx.restore();
+
+  // Header
+  ctx.save();
+  ctx.font = HEADER_FONT;
+  ctx.fillStyle = "#ffffff";
+  ctx.textBaseline = "top";
+  ctx.shadowColor = "transparent";
+  ctx.fillText(node.name, tx + PADDING, ty + PADDING, MAX_WIDTH - PADDING * 2);
+  ctx.restore();
+
+  // Body tokens
+  const bodyOffsetX = tx + PADDING;
+  const bodyOffsetY = ty + PADDING + LINE_HEIGHT + 4;
+  const linkHitAreas: LinkHitArea[] = [];
+
+  ctx.save();
+  ctx.textBaseline = "top";
+  ctx.shadowColor = "transparent";
+
+  for (const token of bodyTokens) {
+    const screenX = bodyOffsetX + token.x;
+    const screenY = bodyOffsetY + token.y;
+
+    if (token.url) {
+      ctx.font = BODY_FONT;
+      ctx.fillStyle = "#7ec8e3";
+      ctx.fillText(token.text, screenX, screenY);
+      ctx.beginPath();
+      ctx.strokeStyle = "#7ec8e3";
+      ctx.lineWidth = 1;
+      ctx.moveTo(screenX, screenY + FONT_SIZE + 1);
+      ctx.lineTo(screenX + token.width, screenY + FONT_SIZE + 1);
+      ctx.stroke();
+      linkHitAreas.push({
+        url: token.url,
+        x: screenX,
+        y: screenY,
+        width: token.width,
+        height: token.height,
+      });
+    } else {
+      ctx.font = BODY_FONT;
+      ctx.fillStyle = "#dcdcdc";
+      ctx.fillText(token.text, screenX, screenY);
+    }
+  }
+
+  ctx.restore();
+  return { linkAreas: linkHitAreas, tooltipBounds };
 }
