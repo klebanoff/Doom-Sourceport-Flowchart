@@ -15,6 +15,7 @@ import type {
 } from "./types";
 import { getSCurveControlPoints } from "./geometry";
 
+
 function darkenColor(hex: string, factor: number): string {
   const match = /^#([0-9a-fA-F]{6})$/.exec(hex);
   if (!match) {
@@ -583,45 +584,15 @@ function renderSingleLink(
 
   ctx.beginPath();
 
-  const waypoints = line.waypoints ?? [];
+  const { c1x, c1y, c2x, c2y } = getSCurveControlPoints(
+    startX,
+    startY,
+    endX,
+    endY
+  );
 
-  if (!waypoints.length) {
-    const { c1x, c1y, c2x, c2y } = getSCurveControlPoints(
-      startX,
-      startY,
-      endX,
-      endY
-    );
-
-    ctx.moveTo(startX, startY);
-    ctx.bezierCurveTo(c1x, c1y, c2x, c2y, endX, endY);
-  } else {
-    const points: { x: number; y: number }[] = [];
-    points.push({ x: startX, y: startY });
-
-    for (let i = 0; i < waypoints.length; i++) {
-      const [wx, wy] = worldToScreen(waypoints[i].x, waypoints[i].y);
-      points.push({ x: wx, y: wy });
-    }
-
-    points.push({ x: endX, y: endY });
-
-    ctx.moveTo(points[0].x, points[0].y);
-
-    for (let i = 0; i < points.length - 1; i++) {
-      const p0 = points[i];
-      const p1 = points[i + 1];
-
-      const { c1x, c1y, c2x, c2y } = getSCurveControlPoints(
-        p0.x,
-        p0.y,
-        p1.x,
-        p1.y
-      );
-
-      ctx.bezierCurveTo(c1x, c1y, c2x, c2y, p1.x, p1.y);
-    }
-  }
+  ctx.moveTo(startX, startY);
+  ctx.bezierCurveTo(c1x, c1y, c2x, c2y, endX, endY);
 
   ctx.setLineDash(line.isPrimary ? [] : [10 * scale, 6 * scale]);
 

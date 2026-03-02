@@ -50,7 +50,6 @@ export interface LayoutLink {
   targetX: number;
   targetY: number;
   isPrimary: boolean;
-  waypoints?: { x: number; y: number }[];
 }
 
 export interface LayoutLane {
