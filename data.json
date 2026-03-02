@@ -5,8 +5,7 @@
         "type": "mainline",
         "releaseDate": "1993-12-10",
         "geneticLine": "official",
-        "description": "The original shareware release of Doom, shipped on December 10, 1993. It introduced the world to id Software's fast-paced first-person shooter formula. See [Doomwiki](https://doomwiki.org/wiki/Doom_v1.0) for details.",
-        "children": [
+         "children": [
             "doomv1.1"
         ]
     },
@@ -700,7 +699,6 @@
         "type": "sourceport",
         "developmentStatus": "discontinued",
         "geneticLine": "zdoom",
-        "description": "ZDoom, created by Randi Heit, brought Hexen and Strife engine features to Doom and added extensive scripting support via ACS and later ZScript. It is now discontinued in favor of GZDoom. See [Doomwiki](https://doomwiki.org/wiki/ZDoom) for more.",
         "parents": [
             "linuxdoom1997",
             "atbdoom",
@@ -729,8 +727,7 @@
         "developmentStatus": "active",
         "type": "sourceport",
         "geneticLine": "chocolate",
-        "description": "A conservation source port that accurately reproduces the original DOS Doom experience, including all original bugs. Created by Simon Howard (fraggle). See [Chocolate Doom website](https://www.chocolate-doom.org) and [Doomwiki](https://doomwiki.org/wiki/Chocolate_Doom).",
-        "parents": [
+         "parents": [
             "linuxdoom1997"
         ]
     },
@@ -1820,7 +1817,6 @@
         "type": "sourceport",
         "developmentStatus": "discontinued",
         "geneticLine": "boom",
-        "description": "PrBoom merged the portability of MBF with the features of Boom, supporting DOS, Linux, Windows, and more. It became the foundation for PrBoom+. See [Doomwiki](https://doomwiki.org/wiki/PrBoom).",
         "parents": [
             "boom"
         ]

@@ -6,7 +6,7 @@ import {
   VIEWPORT_PADDING,
   MIN_YEAR_LABEL_FONT_SIZE,
 } from "./constants";
-import { getLaneDisplayName, getLaneColors } from "./laneConfig";
+import { getLaneDisplayName, getLaneColors, getLaneWatermarkSvg, LANE_ORDER } from "./laneConfig";
 import type {
   CameraLike,
   LayoutResult,
@@ -17,6 +17,7 @@ import type {
 } from "./types";
 import { getSCurveControlPoints } from "./geometry";
 
+const svgImageCache = new Map<string, HTMLImageElement>();
 
 function darkenColor(hex: string, factor: number): string {
   const match = /^#([0-9a-fA-F]{6})$/.exec(hex);
@@ -68,6 +69,36 @@ interface LaneExtents {
 export interface DrawSceneResult {
   linkAreas: LinkHitArea[];
   tooltipBounds: TooltipBounds | null;
+}
+
+export async function preloadLaneWatermarks(): Promise<void> {
+  const loads: Promise<void>[] = [];
+
+  for (const key of LANE_ORDER) {
+    const svgMarkup = getLaneWatermarkSvg(key);
+    if (!svgMarkup) {
+      continue;
+    }
+
+    const dataUrl =
+      "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgMarkup);
+
+    const load = new Promise<void>((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        svgImageCache.set(key, img);
+        resolve();
+      };
+      img.onerror = () => {
+        resolve();
+      };
+      img.src = dataUrl;
+    });
+
+    loads.push(load);
+  }
+
+  await Promise.all(loads);
 }
 
 export function drawScene(
@@ -419,6 +450,42 @@ function computeFrameBounds(
   };
 }
 
+function drawLaneSvgWatermark(
+  context: RenderContext,
+  laneKey: string,
+  cx: number,
+  cy: number,
+  laneHeight: number
+): void {
+  const img = svgImageCache.get(laneKey);
+  if (!img) {
+    return;
+  }
+
+  const naturalW = img.naturalWidth || img.width;
+  const naturalH = img.naturalHeight || img.height;
+  if (naturalW === 0 || naturalH === 0) {
+    return;
+  }
+
+  const targetH = laneHeight * 0.7;
+
+  console.log("laneHeight", laneHeight);
+  
+  const scale = targetH / naturalH;
+  const drawW = naturalW * scale;
+  const drawH = naturalH * scale;
+  const x = cx - drawW / 2;
+  const y = cy - drawH / 2;
+
+
+  context.ctx.save();
+  context.ctx.globalAlpha = 0.12;
+  context.ctx.filter = "brightness(0.35)";
+  context.ctx.drawImage(img, x, y, drawW, drawH);
+  context.ctx.restore();
+}
+
 function drawLaneBackgrounds(context: RenderContext): void {
   const {
     ctx,
@@ -463,13 +530,13 @@ function drawLaneBackgrounds(context: RenderContext): void {
       continue;
     }
 
-    const height = y2 - y1;
+    const visibleHeight = y2 - y1;
 
     const x1 = frameLeft;
     const width = frameRight - frameLeft;
 
     ctx.fillStyle = colors.background;
-    ctx.fillRect(x1, y1, width, height);
+    ctx.fillRect(x1, y1, width, visibleHeight);
 
     const [labelX, labelY] = worldToScreen(worldMinX + 20, lane.yCenter);
     const laneLabel = getLaneDisplayName(lane.key);
@@ -482,6 +549,10 @@ function drawLaneBackgrounds(context: RenderContext): void {
     ctx.font = `${144 * scale}px sans-serif`;
     ctx.fillText(laneLabel, labelX, labelY);
     ctx.restore();
+
+    const [cx] = worldToScreen((worldMinX + worldMaxX) / 2, lane.yCenter);
+    const [, cy] = worldToScreen(0, lane.yCenter);
+    drawLaneSvgWatermark(context, lane.key, cx, cy, rawY1 - rawY2);
   }
 }
 
