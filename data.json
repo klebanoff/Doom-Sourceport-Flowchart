@@ -1729,7 +1729,8 @@
         "developmentStatus": "discontinued",
         "geneticLine": "boom",
         "parents": [
-            "mbf"
+            "mbf",
+            "sfdoom"
         ]
     },
     {
