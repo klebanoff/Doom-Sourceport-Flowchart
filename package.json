@@ -10,7 +10,7 @@
     "validate:data": "bun scripts/validateData.ts"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "^1.3.9"
   },
   "peerDependencies": {
     "typescript": "^5"
