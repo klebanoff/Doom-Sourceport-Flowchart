@@ -758,7 +758,7 @@
         "name": "International Doom 7.0",
         "releaseDate": "2024-03-08",
         "type": "sourceport",
-        "developmentStatus": "merged",
+        "developmentStatus": "active",
         "geneticLine": "chocolate",
         "parents": [
             "internationaldoom",
@@ -770,7 +770,7 @@
         "name": "International Doom",
         "releaseDate": "2022-03-03",
         "type": "sourceport",
-        "developmentStatus": "active",
+        "developmentStatus": "merged",
         "geneticLine": "chocolate",
         "parents": [
             "russiandoom"
@@ -1033,7 +1033,7 @@
     },
     {
         "id": "svstrifeplus",
-        "name": "SvStrife",
+        "name": "SvStrife Plus",
         "releaseDate": "2006-02-01",
         "type": "sourceport",
         "developmentStatus": "discontinued",
@@ -1083,6 +1083,7 @@
         "name": "Doom Legacy Neo",
         "releaseDate": "2025-11-24",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "sourceport",
         "parents": [
             "doomlegacy"
@@ -1093,6 +1094,7 @@
         "name": "EDoom",
         "releaseDate": "2001-01-01",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "doomlegacy"
@@ -1103,6 +1105,7 @@
         "name": "PSP Legacy",
         "releaseDate": "2008-06-18",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "console",
         "parents": [
             "doomlegacy"
@@ -1113,6 +1116,7 @@
         "name": "ReMooD",
         "releaseDate": "2008-03-22",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "doomlegacy"
@@ -1133,6 +1137,7 @@
         "name": "GLHeretic",
         "releaseDate": "1999-03-26",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "heretic",
         "parents": [
             "heretic"
@@ -1143,6 +1148,7 @@
         "name": "DoomGL",
         "releaseDate": "1999-04-27",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "glheretic",
@@ -1166,6 +1172,7 @@
         "name": "ZDoomGL (v2)",
         "releaseDate": "2002-03-02",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "zdoom",
         "parents": [
             "zdoomgl"
@@ -1176,6 +1183,7 @@
         "name": "Skulltag",
         "releaseDate": "2000-06-11",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "zdoom",
         "parents": [
             "zdoom",
@@ -1187,6 +1195,7 @@
         "name": "ScoreDoom",
         "releaseDate": "2007-08-02",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "zdoom",
         "parents": [
             "gzdoom"
@@ -1197,6 +1206,7 @@
         "name": "ScoreDoomST",
         "releaseDate": "2010-03-27",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "zdoom",
         "parents": [
             "scoredoom",
@@ -1209,6 +1219,7 @@
         "name": "Zandronum",
         "releaseDate": "2012-06-03",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "zdoom",
         "parents": [
             "skulltag"
@@ -1219,6 +1230,7 @@
         "name": "Q-Zandronum",
         "releaseDate": "2020-11-09",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "zdoom",
         "parents": [
             "zandronum"
@@ -1229,6 +1241,7 @@
         "name": "DoomPC",
         "releaseDate": "2006-12-30",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "doomgl"
@@ -1239,6 +1252,7 @@
         "name": "DoomGLES",
         "releaseDate": "2006-12-10",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "doomgl"
@@ -1249,6 +1263,7 @@
         "name": "DoomPPC",
         "releaseDate": "2006-12-30",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "doomgles"
@@ -1259,6 +1274,7 @@
         "name": "HHeretic",
         "releaseDate": "2001-01-16",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "heretic",
         "parents": [
             "heretic"
@@ -1269,6 +1285,7 @@
         "name": "Linux Heretic",
         "releaseDate": "1999-01-18",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "heretic",
         "parents": [
             "heretic"
@@ -1279,6 +1296,7 @@
         "name": "wHeretic",
         "releaseDate": "1999-01-16",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "heretic",
         "parents": [
             "heretic"
@@ -1289,6 +1307,7 @@
         "name": "WinHeretic",
         "releaseDate": "1999-01-15",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "heretic",
         "parents": [
             "heretic"
@@ -1299,6 +1318,7 @@
         "name": "Phoenix Doom",
         "releaseDate": "2019-09-23",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "sourceport",
         "parents": [
             "doomfor3do"
@@ -1309,6 +1329,7 @@
         "name": "OptiDoom",
         "releaseDate": "2018-12-10",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "sourceport",
         "parents": [
             "doomfor3do"
@@ -1319,6 +1340,7 @@
         "name": "Calico",
         "releaseDate": "2017-04-30",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "sourceport",
         "parents": [
             "jaguardoom"
@@ -1329,6 +1351,7 @@
         "name": "Doom 32X: Resurrection",
         "releaseDate": "2021-10-17",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "sourceport",
         "parents": [
             "jaguardoom",
@@ -1340,6 +1363,7 @@
         "name": "Doom CD32X Fusion",
         "releaseDate": "2024-10-17",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "sourceport",
         "parents": [
             "doom32xressurection"
@@ -1412,6 +1436,7 @@
         "name": "64Doom",
         "releaseDate": "2014-10-13",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "sourceport",
         "parents": [
             "linuxdoom1997"
@@ -1422,6 +1447,7 @@
         "name": "ADoom",
         "releaseDate": "1997-12-28",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "linuxdoom1997"
@@ -1432,6 +1458,7 @@
         "name": "AmiDoom",
         "releaseDate": "1997-12-24",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "linuxdoom1997"
@@ -1442,6 +1469,7 @@
         "name": "AmigaDoom",
         "releaseDate": "1997-12-26",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "linuxdoom1997"
@@ -1452,6 +1480,7 @@
         "name": "ZhaDoom68K",
         "releaseDate": "1998-01-28",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "amigadoom"
@@ -1462,6 +1491,7 @@
         "name": "ZhaDoomPPC",
         "releaseDate": "1998-01-28",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "amigadoom"
@@ -1472,6 +1502,7 @@
         "name": "ADoomPPC",
         "releaseDate": "1998-03-31",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "adoom"
@@ -1482,6 +1513,7 @@
         "name": "Bad Mood",
         "releaseDate": "1997-11-01",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "sourceport",
         "parents": [
             "linuxdoom1997"
@@ -1492,7 +1524,8 @@
         "name": "CDoom",
         "releaseDate": "1997-11-01",
         "type": "sourceport",
-        "geneticLine": "sourceport",
+        "developmentStatus": "active",
+        "geneticLine": "discontinued",
         "parents": [
             "linuxdoom1997"
         ]
@@ -1502,6 +1535,7 @@
         "name": "CDoom v2",
         "releaseDate": "1997-11-01",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "cdoom",
@@ -1513,6 +1547,7 @@
         "name": "Doom for NUON",
         "releaseDate": "1997-12-01",
         "type": "sourceport",
+        "developmentStatus": "inactive",
         "geneticLine": "sourceport",
         "parents": [
             "cdoom",
@@ -1524,6 +1559,7 @@
         "name": "Doom on the Web",
         "releaseDate": "2011-06-02",
         "type": "sourceport",
+        "developmentStatus": "inactive",
         "geneticLine": "sourceport",
         "parents": [
             "linuxdoom1997"
@@ -1534,6 +1570,7 @@
         "name": "Doom SysAdmin Tool",
         "releaseDate": "1999-10-17",
         "type": "sourceport",
+        "developmentStatus": "inactive",
         "geneticLine": "sourceport",
         "parents": [
             "xdoom"
@@ -1544,6 +1581,7 @@
         "name": "XDoom",
         "releaseDate": "1998-10-17",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "linuxdoom1997"
@@ -1554,6 +1592,7 @@
         "name": "Doom UEFI",
         "releaseDate": "2019-12-27",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "sourceport",
         "parents": [
             "linuxdoom1997"
@@ -1564,6 +1603,7 @@
         "name": "DoomCott",
         "releaseDate": "2002-03-21",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "linuxdoom1997"
@@ -1574,6 +1614,7 @@
         "name": "Boom",
         "releaseDate": "1998-04-17",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "boom",
         "parents": [
             "finaldoom",
@@ -1585,6 +1626,7 @@
         "name": "LinBoom",
         "releaseDate": "1998-05-30",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "boom",
         "parents": [
             "boom",
@@ -1596,6 +1638,7 @@
         "name": "LxDoom",
         "releaseDate": "1998-09-23",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "boom",
         "parents": [
             "boom"
@@ -1606,6 +1649,7 @@
         "name": "LsdlDoom",
         "releaseDate": "1998-09-23",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "boom",
         "parents": [
             "lxdoom"
@@ -1616,6 +1660,7 @@
         "name": "LsdlDoom-PS2",
         "releaseDate": "2008-02-13",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "boom",
         "parents": [
             "lxdoom"
@@ -1626,6 +1671,7 @@
         "name": "PowerDoom",
         "releaseDate": "2000-07-17",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "boom",
         "parents": [
             "lxdoom"
@@ -1636,6 +1682,7 @@
         "name": "MBF",
         "releaseDate": "1998-09-23",
         "type": "sourceport",
+        "developmentStatus": "inactive",
         "geneticLine": "boom",
         "parents": [
             "boom"
@@ -1646,6 +1693,7 @@
         "name": "Fusion",
         "releaseDate": "2002-09-23",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "boom",
         "parents": [
             "mbf"
@@ -1656,6 +1704,7 @@
         "name": "ColdFusion",
         "releaseDate": "2023-09-27",
         "type": "sourceport",
+        "developmentStatus": "inactive",
         "geneticLine": "boom",
         "parents": [
             "fusion"
@@ -1666,6 +1715,7 @@
         "name": "JDP",
         "releaseDate": "2001-09-29",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "boom",
         "parents": [
             "mbf"
@@ -1676,6 +1726,7 @@
         "name": "SMMU",
         "releaseDate": "1999-03-20",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "boom",
         "parents": [
             "mbf"
@@ -1686,6 +1737,7 @@
         "name": "Eternity Engine",
         "releaseDate": "2001-01-08",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "boom",
         "parents": [
             "smmu"
@@ -1696,6 +1748,7 @@
         "name": "Tartar",
         "releaseDate": "2021-12-24",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "boom",
         "parents": [
             "eternityengine"
@@ -1706,6 +1759,7 @@
         "name": "WinMBF",
         "releaseDate": "2004-08-10",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "boom",
         "parents": [
             "mbf"
@@ -1716,6 +1770,7 @@
         "name": "Pooch",
         "releaseDate": "2021-07-26",
         "type": "sourceport",
+        "developmentStatus": "inactive",
         "geneticLine": "boom",
         "parents": [
             "winmbf"
@@ -1726,6 +1781,7 @@
         "name": "Woof!",
         "releaseDate": "2020-02-21",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "boom",
         "parents": [
             "winmbf"
@@ -1736,6 +1792,7 @@
         "name": "Nugget Doom",
         "releaseDate": "2021-09-07",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "boom",
         "parents": [
             "woof"
@@ -1746,6 +1803,7 @@
         "name": "Cherry Doom",
         "releaseDate": "2023-09-01",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "boom",
         "parents": [
             "nuggetdoom"
@@ -1756,6 +1814,7 @@
         "name": "PrBoom",
         "releaseDate": "1998-11-15",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "boom",
         "parents": [
             "boom"
@@ -1766,6 +1825,7 @@
         "name": "PrBoom v2.1.0",
         "releaseDate": "2000-09-01",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "boom",
         "parents": [
             "prboom",
@@ -1788,6 +1848,7 @@
         "name": "DS Doom",
         "releaseDate": "2006-08-08",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "console",
         "parents": [
             "prboomv2.1"
@@ -1798,6 +1859,7 @@
         "name": "PrBoom+",
         "releaseDate": "2005-03-09",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "boom",
         "parents": [
             "prboomv2.1"
@@ -1808,6 +1870,7 @@
         "name": "DSDA-Doom",
         "releaseDate": "2020-11-11",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "boom",
         "parents": [
             "prboomplus"
@@ -1818,6 +1881,7 @@
         "name": "From DOOM With Love",
         "releaseDate": "2021-07-11",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "boom",
         "parents": [
             "dsda"
@@ -1828,6 +1892,7 @@
         "name": "Nyan Doom",
         "releaseDate": "2024-06-16",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "boom",
         "parents": [
             "dsda"
@@ -1838,6 +1903,7 @@
         "name": "PrBoomX",
         "releaseDate": "2023-06-11",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "boom",
         "parents": [
             "prboomplus"
@@ -1848,6 +1914,7 @@
         "name": "PrjDoom",
         "releaseDate": "1998-12-29",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "boom",
         "parents": [
             "steveboom",
@@ -1859,6 +1926,7 @@
         "name": "Steve Boom",
         "releaseDate": "1998-08-14",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "boom",
         "parents": [
             "doomworld",
@@ -1870,6 +1938,7 @@
         "name": "DoomWorld!",
         "releaseDate": "1998-05-21",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "dosdoom"
@@ -1880,6 +1949,7 @@
         "name": "RORDoom",
         "releaseDate": "2000-02-12",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "boom",
         "parents": [
             "boom"
@@ -1890,6 +1960,7 @@
         "name": "ReBoom",
         "releaseDate": "2021-08-22",
         "type": "sourceport",
+        "developmentStatus": "inactive",
         "geneticLine": "boom",
         "parents": [
             "boom"
@@ -1900,6 +1971,7 @@
         "name": "DoomDC",
         "releaseDate": "2002-03-09",
         "type": "sourceport",
+        "developmentStatus": "inactive",
         "geneticLine": "sourceport",
         "parents": [
             "linuxdoom1997"
@@ -1910,6 +1982,7 @@
         "name": "nxDoom",
         "releaseDate": "2002-08-08",
         "type": "sourceport",
+        "developmentStatus": "inactive",
         "geneticLine": "sourceport",
         "parents": [
             "doomdc"
@@ -1920,6 +1993,7 @@
         "name": "ggiDoom",
         "releaseDate": "1997-12-24",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "linuxdoom1997"
@@ -1930,16 +2004,18 @@
         "name": "NTDOOM",
         "releaseDate": "1998-01-07",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "linuxdoom1997"
         ]
     },
     {
-        "id": "ntdoom",
+        "id": "wdmp",
         "name": "WDMP",
         "releaseDate": "1998-07-30",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "ntdoom"
@@ -1950,6 +2026,7 @@
         "name": "PmDoom",
         "releaseDate": "1998-03-11",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "linuxdoom1997"
@@ -1960,6 +2037,7 @@
         "name": "gpDoom",
         "releaseDate": "2006-05-17",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "pmdoom"
@@ -1970,6 +2048,7 @@
         "name": "SDL Doom",
         "releaseDate": "1998-07-04",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "linuxdoom1997"
@@ -1980,6 +2059,7 @@
         "name": "CDoom (mobile)",
         "releaseDate": "2001-09-11",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "sdldoom"
@@ -1990,6 +2070,7 @@
         "name": "C2Doom",
         "releaseDate": "2008-10-29",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "cdoommobile"
@@ -2000,6 +2081,7 @@
         "name": "Doom PSP",
         "releaseDate": "2006-01-26",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "sdldoom"
@@ -2010,6 +2092,7 @@
         "name": "JLiME-Doom",
         "releaseDate": "2008-10-19",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "sdldoom"
@@ -2020,6 +2103,7 @@
         "name": "WinDoom",
         "releaseDate": "1998-01-14",
         "type": "sourceport",
+        "developmentStatus": "inactive",
         "geneticLine": "sourceport",
         "parents": [
             "linuxdoom1997"
@@ -2030,6 +2114,7 @@
         "name": "DoomX",
         "releaseDate": "2003-05-22",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "windoom"
@@ -2040,6 +2125,7 @@
         "name": "glDoom",
         "releaseDate": "1998-10-05",
         "type": "sourceport",
+        "developmentStatus": "inactive",
         "geneticLine": "sourceport",
         "parents": [
             "windoom"
@@ -2050,6 +2136,7 @@
         "name": "IAS Doom",
         "releaseDate": "1999-06-18",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "windoom"
@@ -2060,6 +2147,7 @@
         "name": "Doom4CE",
         "releaseDate": "1999-10-25",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "sourceport",
         "parents": [
             "windoom"
@@ -2070,6 +2158,7 @@
         "name": "bZDoom",
         "releaseDate": "2008-05-29",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "zdoom",
         "parents": [
             "zdoom"
@@ -2080,6 +2169,7 @@
         "name": "csDoom",
         "releaseDate": "2000-05-27",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "zdoom",
         "parents": [
             "zdoom"
@@ -2090,6 +2180,7 @@
         "name": "Odamex",
         "releaseDate": "2007-01-19",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "zdoom",
         "parents": [
             "csdoom"
@@ -2111,6 +2202,7 @@
         "name": "X-Doom",
         "releaseDate": "2004-10-29",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "zdoom",
         "parents": [
             "zdaemon"
@@ -2121,6 +2213,7 @@
         "name": "GZDoom",
         "releaseDate": "2005-08-30",
         "type": "sourceport",
+        "developmentStatus": "active",
         "geneticLine": "zdoom",
         "parents": [
             "zdoom"
@@ -2131,6 +2224,7 @@
         "name": "GZ3Doom",
         "releaseDate": "2015-03-14",
         "type": "sourceport",
+        "developmentStatus": "inactive",
         "geneticLine": "zdoom",
         "parents": [
             "gzdoom"
@@ -2141,6 +2235,7 @@
         "name": "GZDoom for OS X",
         "releaseDate": "2011-12-25",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "zdoom",
         "parents": [
             "gzdoom"
@@ -2151,6 +2246,7 @@
         "name": "GZDoom Vintage",
         "releaseDate": "2018-07-30",
         "type": "sourceport",
+        "developmentStatus": "discontinued",
         "geneticLine": "zdoom",
         "parents": [
             "gzdoom"
@@ -2556,6 +2652,39 @@
             "doom128",
             "gamesrc-ver-recreation",
             "hexenexe"
+        ]
+    },
+    {
+        "id" : "aceengine",
+        "name": "ACE Engine",
+        "releaseDate": "2020-09-28",
+        "type": "sourceport",
+        "developmentStatus": "active",
+        "geneticLine": "sourceport",
+        "parents": [
+            "doom2exe"
+        ]
+    },
+    {
+        "id" : "vicdoom",
+        "name": "vicdoom",
+        "releaseDate": "2010-11-26",
+        "type": "sourceport",
+        "developmentStatus": "discontinued",
+        "geneticLine": "sourceport",
+        "parents": [
+            "linuxdoom1997"
+        ]
+    },
+    {
+        "id" : "adoomatari",
+        "name": "ADoom (Atari)",
+        "releaseDate": "2023-08-27",
+        "type": "sourceport",
+        "developmentStatus": "discontinued",
+        "geneticLine": "sourceport",
+        "parents": [
+            "vicdoom"
         ]
     }
 ]

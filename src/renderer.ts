@@ -69,6 +69,9 @@ export function drawScene(
   render: LayoutResult,
   hoveredNodeId: string | null
 ): void {
+  const dpr = window.devicePixelRatio || 1;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
   const context = createRenderContext(ctx, canvas, camera, render, hoveredNodeId);
 
   clearCanvas(context);
@@ -96,8 +99,8 @@ function createRenderContext(
 
   const contentLeft = VIEWPORT_PADDING;
   const contentTop = VIEWPORT_PADDING;
-  const contentWidth = canvas.width - 2 * VIEWPORT_PADDING;
-  const contentHeight = canvas.height - 2 * VIEWPORT_PADDING;
+  const contentWidth = canvas.clientWidth - 2 * VIEWPORT_PADDING;
+  const contentHeight = canvas.clientHeight - 2 * VIEWPORT_PADDING;
 
   const relatedNodeIds = computeRelatedNodeIds(render, hoveredNodeId);
   const snappedScreenPositions = computeSnappedScreenPositions(
@@ -127,7 +130,7 @@ function createRenderContext(
 
 function clearCanvas(context: RenderContext): void {
   const { ctx, canvas } = context;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
 }
 
 function beginContentClip(context: RenderContext): void {
@@ -275,8 +278,8 @@ function computeSnappedScreenPositions(
     hoveredNode.Y
   );
 
-  const screenWidth = canvas.width;
-  const screenHeight = canvas.height;
+  const screenWidth = canvas.clientWidth;
+  const screenHeight = canvas.clientHeight;
   const edgeMargin = VIEWPORT_PADDING;
   const scale = camera.scale;
   const halfNodeWidthScreen = (NODE_WIDTH * scale) / 2;

@@ -20,8 +20,13 @@ export function setupInputHandlers(
   let touching = false;
   let currentHoveredId: string | null = null;
 
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  const dpr = window.devicePixelRatio || 1;
+  const logicalWidth = document.body.clientWidth;
+  const logicalHeight = document.body.clientHeight;
+  canvas.style.width = logicalWidth + "px";
+  canvas.style.height = logicalHeight + "px";
+  canvas.width = Math.round(logicalWidth * dpr);
+  canvas.height = Math.round(logicalHeight * dpr);
 
   canvas.onmousedown = handlePointerDown;
   document.body.addEventListener("mousemove", handlePointerMove);
@@ -171,8 +176,13 @@ export function setupInputHandlers(
   }
 
   function resetCanvasSize(): void {
-    canvas.width = document.body.clientWidth;
-    canvas.height = document.body.clientHeight;
+    const dpr = window.devicePixelRatio || 1;
+    const logicalWidth = document.body.clientWidth;
+    const logicalHeight = document.body.clientHeight;
+    canvas.style.width = logicalWidth + "px";
+    canvas.style.height = logicalHeight + "px";
+    canvas.width = Math.round(logicalWidth * dpr);
+    canvas.height = Math.round(logicalHeight * dpr);
     onDraw();
   }
 
