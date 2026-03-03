@@ -5,6 +5,7 @@ import {
   geneticLines,
   VIEWPORT_PADDING,
   MIN_YEAR_LABEL_FONT_SIZE,
+  MIN_YEAR_LABEL_GAP_PX,
 } from "./constants";
 import { getLaneDisplayName, getLaneColors, getLaneWatermarkSvg, LANE_ORDER } from "./laneConfig";
 import type {
@@ -626,6 +627,8 @@ function drawYearLabels(context: RenderContext): void {
   const minYearLabelBottom = contentTop + yearLabelFontSize + labelPadV;
   const yearLabelScreenY = Math.max(naturalYearLabelBottom, minYearLabelBottom);
 
+  let lastDrawnRight: number | null = null;
+
   for (let i = 0; i < render.timelineMarkers.length; i++) {
     const marker = render.timelineMarkers[i];
     const [markerX] = worldToScreen(marker.x, axisY);
@@ -636,6 +639,11 @@ function drawYearLabels(context: RenderContext): void {
     const bgY = yearLabelScreenY - yearLabelFontSize - labelPadV;
     const bgW = textWidth + labelPadH * 2;
     const bgH = yearLabelFontSize + labelPadV * 2;
+    const bgRight = bgX + bgW;
+
+    if (lastDrawnRight !== null && bgX <= lastDrawnRight) {
+      continue;
+    }
 
     ctx.fillStyle = "rgba(255, 255, 255, 0.88)";
     ctx.fillRect(bgX, bgY, bgW, bgH);
@@ -645,6 +653,8 @@ function drawYearLabels(context: RenderContext): void {
 
     ctx.fillStyle = "#000000";
     ctx.fillText(label, markerX, yearLabelScreenY);
+
+    lastDrawnRight = bgRight + MIN_YEAR_LABEL_GAP_PX;
   }
 
   ctx.restore();

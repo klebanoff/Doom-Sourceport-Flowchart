@@ -16,8 +16,7 @@ export function setupInputHandlers(
   onNodeTap?: (id: string | null) => void,
   onPanelScroll?: (delta: number) => void,
   onCanvasClick?: (x: number, y: number) => void,
-  isInPanel?: (x: number, y: number) => boolean,
-  onCameraChange?: (camera: CameraLike) => void
+  isInPanel?: (x: number, y: number) => boolean
 ): void {
   let prevMouseX = 0;
   let prevMouseY = 0;
@@ -62,7 +61,6 @@ export function setupInputHandlers(
     const [afterWheelX, afterWheelY] = camera.screenToWorld(e.x, e.y);
     camera.offsetX += prevWheelX - afterWheelX;
     camera.offsetY += prevWheelY - afterWheelY;
-    onCameraChange?.(camera);
     onDraw();
   };
 
@@ -100,7 +98,6 @@ export function setupInputHandlers(
     camera.offsetY -= (e.clientY - prevMouseY) / camera.scale;
     prevMouseX = e.clientX;
     prevMouseY = e.clientY;
-    onCameraChange?.(camera);
     onDraw();
   }
 
@@ -160,7 +157,6 @@ export function setupInputHandlers(
       camera.offsetY -= panY / camera.scale;
       const hoverCleared = onCameraMove?.() ?? false;
       if (hoverCleared) currentHoveredId = null;
-      onCameraChange?.(camera);
       onDraw();
     }
 
@@ -189,7 +185,6 @@ export function setupInputHandlers(
           camera.scale *= zoomAmount;
           const hoverCleared = onCameraMove?.() ?? false;
           if (hoverCleared) currentHoveredId = null;
-          onCameraChange?.(camera);
           onDraw();
         }
       }

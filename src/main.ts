@@ -6,7 +6,7 @@ import { setupInputHandlers } from "./input";
 import type { DoomData, LinkHitArea, TooltipBounds } from "./types";
 import { simpleCrossLaneSample } from "./devSamples";
 import { NODE_HEIGHT, NODE_WIDTH } from "./constants";
-import { initCameraView, saveCameraState } from "./viewState";
+import { initCameraView } from "./viewState";
 
 async function loadDataJson(): Promise<DoomData | null> {
   try {
@@ -194,9 +194,6 @@ async function init(): Promise<void> {
   const checkIsInPanel = (y: number): boolean =>
     tappedNodeId !== null && isInPanel(canvas, y);
 
-  const handleCameraChange = (): void => {
-    saveCameraState(camera);
-  };
 
   setupInputHandlers(
     canvas,
@@ -208,8 +205,7 @@ async function init(): Promise<void> {
     handleNodeTap,
     handlePanelScroll,
     handleCanvasClick,
-    checkIsInPanel,
-    handleCameraChange
+    checkIsInPanel
   );
   await preloadLaneWatermarks();
   initCameraView(camera, render, canvas);

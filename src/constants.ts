@@ -26,4 +26,5 @@ export const PADDING_BETWEEN_NODES_X = 50;
 export const PADDING_BETWEEN_NODES_Y = 100;
 export const VIEWPORT_PADDING = 0;
 export const MIN_YEAR_LABEL_FONT_SIZE = 14;
+export const MIN_YEAR_LABEL_GAP_PX = 4;
 
