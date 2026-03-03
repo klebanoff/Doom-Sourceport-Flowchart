@@ -7,7 +7,6 @@ export interface CameraState {
   scale: number;
 }
 
-const STORAGE_KEY = "doomSourceportFlowchart.cameraState";
 const MIN_SCALE = 0.05;
 const MAX_SCALE = 10;
 
@@ -15,72 +14,6 @@ function clamp(value: number, min: number, max: number): number {
   if (value < min) return min;
   if (value > max) return max;
   return value;
-}
-
-function getStorage(): Storage | null {
-  try {
-    if (typeof window === "undefined" || !window.localStorage) {
-      return null;
-    }
-    return window.localStorage;
-  } catch {
-    return null;
-  }
-}
-
-export function loadCameraState(): CameraState | null {
-  const storage = getStorage();
-  if (!storage) {
-    return null;
-  }
-
-  try {
-    const raw = storage.getItem(STORAGE_KEY);
-    if (!raw) {
-      return null;
-    }
-
-    const parsed = JSON.parse(raw) as unknown;
-    if (
-      typeof parsed !== "object" ||
-      parsed === null ||
-      typeof (parsed as CameraState).offsetX !== "number" ||
-      typeof (parsed as CameraState).offsetY !== "number" ||
-      typeof (parsed as CameraState).scale !== "number"
-    ) {
-      return null;
-    }
-
-    const state = parsed as CameraState;
-    return {
-      offsetX: state.offsetX,
-      offsetY: state.offsetY,
-      scale: clamp(state.scale, MIN_SCALE, MAX_SCALE),
-    };
-  } catch {
-    return null;
-  }
-}
-
-export function saveCameraState(camera: CameraLike): void {
-  const storage = getStorage();
-  if (!storage) {
-    return;
-  }
-
-  const safeScale = clamp(camera.scale, MIN_SCALE, MAX_SCALE);
-
-  const state: CameraState = {
-    offsetX: camera.offsetX,
-    offsetY: camera.offsetY,
-    scale: safeScale,
-  };
-
-  try {
-    storage.setItem(STORAGE_KEY, JSON.stringify(state));
-  } catch {
-    // ignore write errors
-  }
 }
 
 function computeWorldBounds(render: LayoutResult): {
@@ -167,14 +100,6 @@ export function initCameraView(
   render: LayoutResult,
   canvas: HTMLCanvasElement
 ): void {
-  const stored = loadCameraState();
-  if (stored) {
-    camera.offsetX = stored.offsetX;
-    camera.offsetY = stored.offsetY;
-    camera.scale = stored.scale;
-    return;
-  }
-
   const fitted = computeZoomToFitState(render, canvas);
   camera.offsetX = fitted.offsetX;
   camera.offsetY = fitted.offsetY;
